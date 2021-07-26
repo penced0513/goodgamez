@@ -3,6 +3,8 @@ var router = express.Router();
 const { asyncHandler, csrfProtection, handleValidationErrors}  = require("../utils")
 const { User } = require("../db/models");
 const { check } = require('express-validator');
+const bcrypt = require("bcryptjs")
+const { loginUser } = require("../auth")
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,7 +12,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/signup', csrfProtection, (req,res) => {
-  res.render('sign-up', { csrfToken: req.csrfToken() })
+  res.render('sign-up', { title:"Good Gamez - Sign up", csrfToken: req.csrfToken() })
 })
 
 const signupValidator = [
@@ -49,11 +51,19 @@ router.post('/signup', signupValidator, handleValidationErrors, csrfProtection, 
 
   const { username, email, password} = req.body
   
-  const user = await User.build({ username, email })
+  const hashedPassword = await bcrypt.hash(password, 12)
+  
+  const validationErrors = validationResult(req).errors.map(({ msg}) => `${msg}`);
 
+  if (!validationErrors) {
+    const user = await User.create({ username, email, hashedPassword })
+    loginUser(req, user)
+    res.redirect('/')
+  } else {
 
+    res.render('sign-up', { title:"Good Gamez - Sign Up", csrfToken: req.csrfToken(), validationErrors})
+  }
 
-  res.render('sign-up')
 }))
 
 module.exports = router;
