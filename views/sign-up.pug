@@ -1,1 +1,12 @@
-extends 
+extends layout.pug
+include utils.pug
+block content
+  +validationErrorSummary(validationErrors)
+  div
+    form(action="/signup", method="post")
+      input(type="hidden" name="_csrf" value=csrfToken)
+      +field("Username", "username", username, "text", "Enter Username")
+      +field("Email", "email", email, "email", "Enter Email")
+      +field("Password", "password", "", "text", "Enter Password")
+      +field("Confirm Password", "confirmedPassword", "", "text", "Confirm Password")
+      button(type="submit") Register

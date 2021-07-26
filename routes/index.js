@@ -3,17 +3,50 @@ var router = express.Router();
 const { asyncHandler, csrfProtection, handleValidationErrors}  = require("../utils")
 const { User } = require("../db/models");
 const { check } = require('express-validator');
-const bcrypt = require("bcryptjs")
-const { loginUser } = require("../auth")
+const bcrypt = require("bcryptjs");
+const { loginUser, logoutUser } = require("../auth");
+const { validationResult } = require("express-validator");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'a/A Express Skeleton Home' });
 });
 
+router.get('/login', csrfProtection, (req,res) => {
+  res.render('login', { title:"Good Gamez - Log In", csrfToken: req.csrfToken() })
+});
+
+router.post('/login', csrfProtection, asyncHandler(async(req,res) => {
+   const { username, password } = req.body;
+   const errors = [];
+   const user = await User.findOne({
+     where: { username }
+   });
+
+   if (user) {
+     const isPassword = await bcrypt.compare(password, user.hashedPassword)
+     if (isPassword) {
+      loginUser(req, user);
+      res.redirect("/")
+    }
+   }
+
+   errors.push("Invalid Login")
+
+   res.render("login", { username, errors, title:"Good Gamez - Log In", csrfToken: req.csrfToken() })
+
+}));
+
+router.get('/logout', asyncHandler(async(req, res) => {
+  await logoutUser(req, res);
+  // req.session = null;
+  // res.send("logged out")
+  res.redirect("/");
+}));
+
 router.get('/signup', csrfProtection, (req,res) => {
   res.render('sign-up', { title:"Good Gamez - Sign up", csrfToken: req.csrfToken() })
-})
+});
 
 const signupValidator = [
   check("username")
@@ -47,7 +80,7 @@ const signupValidator = [
       return true;
   })
 ]
-router.post('/signup', signupValidator, handleValidationErrors, csrfProtection,  asyncHandler(async(req,res) => {
+router.post('/signup', signupValidator, csrfProtection, asyncHandler(async(req,res) => {
 
   const { username, email, password} = req.body
   
@@ -55,13 +88,13 @@ router.post('/signup', signupValidator, handleValidationErrors, csrfProtection, 
   
   const validationErrors = validationResult(req).errors.map(({ msg}) => `${msg}`);
 
-  if (!validationErrors) {
+  if (!validationErrors.length) {
     const user = await User.create({ username, email, hashedPassword })
     loginUser(req, user)
     res.redirect('/')
   } else {
 
-    res.render('sign-up', { title:"Good Gamez - Sign Up", csrfToken: req.csrfToken(), validationErrors})
+    res.render('sign-up', { title:"Good Gamez - Sign Up", csrfToken: req.csrfToken(), validationErrors, username, email})
   }
 
 }))
