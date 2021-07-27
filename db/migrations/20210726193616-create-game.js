@@ -19,9 +19,12 @@ module.exports = {
       img: {
         type: Sequelize.TEXT
       },
+      developer: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       genreId: {
-        references: { model: "Genres"},
-        unique: true,
+        references: { model: "Genres" },
         allowNull: false,
         type: Sequelize.INTEGER
       },
