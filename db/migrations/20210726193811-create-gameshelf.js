@@ -12,6 +12,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      removable: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN
+      },
       userId: {
         allowNull: false,
         references: { model: "Users" },

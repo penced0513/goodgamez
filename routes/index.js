@@ -91,10 +91,10 @@ router.post('/signup', signupValidator, csrfProtection, asyncHandler(async (req,
 
   if (!validationErrors.length) {
     const user = await User.create({ username, email, hashedPassword })
-    await Gameshelf.create({ name: 'All', userId: user.id })
-    await Gameshelf.create({ name: 'Want to play', userId: user.id })
-    await Gameshelf.create({ name: 'Currently Playing', userId: user.id })
-    await Gameshelf.create({ name: 'Played', userId: user.id })
+    await Gameshelf.create({ name: 'All', userId: user.id, removable: false })
+    await Gameshelf.create({ name: 'Want to play', userId: user.id, removable: false })
+    await Gameshelf.create({ name: 'Currently Playing', userId: user.id, removable: false })
+    await Gameshelf.create({ name: 'Played', userId: user.id, removable: false })
     loginUser(req, res, user)
     res.redirect('/')
   } else {
