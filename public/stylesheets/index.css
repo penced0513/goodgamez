@@ -1,5 +1,12 @@
 @import "reset.css";
 @import "log-in.css";
 @import "sign-up.css";
+@import "shelves.css";
 @import "games.css";
 @import "game.css";
+
+h1 {
+    color: #555555;
+}
+
+

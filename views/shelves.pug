@@ -1,0 +1,19 @@
+extends layout.pug
+block content
+    ol.shelf: h2 My Shelves
+        each shelf in shelfList
+            li: a(onclick=`window.location.href='/shelves/${shelf.Id}'`)=shelf.name
+        button(class='hideButton' href='#', type='button', onclick='hide()') Add Shelf
+        form(class='addShelfForm' action='/shelves' method='post')
+            input(type="hidden" name="_csrf" value=csrfToken)
+            label(class='addShelfForm', for='newShelf') Add a shelf:
+            input(class='addShelfForm', type='text', name='newShelf')
+            button(class='addShelfForm', type='submit') Add
+        script.
+            let show = () => {
+                document.querySelectorAll('.addShelfForm').style.display='block'
+            }
+            let hide = () => {
+                document.querySelector('.hideButton').style.display='none'
+                show()
+            }
