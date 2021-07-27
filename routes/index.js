@@ -26,7 +26,7 @@ router.post('/login', csrfProtection, asyncHandler(async(req,res) => {
    if (user) {
      const isPassword = await bcrypt.compare(password, user.hashedPassword)
      if (isPassword) {
-      loginUser(req, user);
+      loginUser(req, res, user);
       res.redirect("/")
     }
    }
@@ -90,7 +90,7 @@ router.post('/signup', signupValidator, csrfProtection, asyncHandler(async(req,r
 
   if (!validationErrors.length) {
     const user = await User.create({ username, email, hashedPassword })
-    loginUser(req, user)
+    loginUser(req, res, user)
     res.redirect('/')
   } else {
 
