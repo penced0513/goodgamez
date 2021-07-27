@@ -1,0 +1,18 @@
+#games-page { 
+    display: flex;
+    justify-content: space-between;
+}
+
+.game-names{
+    font-weight: bold;
+}
+
+.game-names:hover,
+.game-genres:hover {
+    color: rebeccapurple;
+    cursor:pointer;
+}
+
+.game-imgs:hover { 
+    cursor:pointer;
+}
