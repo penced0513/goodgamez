@@ -8,15 +8,15 @@ module.exports = {
 
       Example:
       */
-      return queryInterface.bulkInsert('Reviews', [
-        {
+    return queryInterface.bulkInsert('Reviews', [
+      {
         review: 'Metacritic said this game was good',
         reviewScore: 89,
         userId: 1,
         gameId: 2,
-        createdAt: new Date(), 
+        createdAt: new Date(),
         updatedAt: new Date()
-       }
+      }
     ], {});
   },
 
@@ -27,6 +27,6 @@ module.exports = {
 
       Example:
       */
-      return queryInterface.bulkDelete('People', null, { truncate: true, cascade: true, restartIdentity: true });
+    return queryInterface.bulkDelete('Reviews', null, { truncate: true, cascade: true, restartIdentity: true });
   }
 };
