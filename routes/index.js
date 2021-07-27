@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { asyncHandler, csrfProtection, handleValidationErrors } = require("../utils")
 const { User, Gameshelf } = require("../db/models");
+
 const { check } = require('express-validator');
 const bcrypt = require("bcryptjs");
 const { loginUser, logoutUser } = require("../auth");
