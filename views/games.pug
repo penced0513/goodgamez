@@ -1,0 +1,12 @@
+extends layout.pug
+block content
+  div
+    div#games-container
+      each game in games
+        div(id=`game-${game.id}`).game
+    div#genres-container
+      ul
+        each genre in genres
+          li
+            a(href=`genres/${genre.id}`)= genre.name
+  

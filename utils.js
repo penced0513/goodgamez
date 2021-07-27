@@ -2,6 +2,7 @@ const csrf = require('csurf')
 const csrfProtection = csrf({ cookie: true})
 
 const { check, validationResult } = require("express-validator");
+const { URITooLong } = require('http-errors');
 
 const handleValidationErrors = (req, res, next) => {
     const validationErrors = validationResult(req);
@@ -23,4 +24,4 @@ const asyncHandler = (handler) => (req,res,next) => handler(req,res,next).catch(
 
 
 
-module.exports = { asyncHandler, csrfProtection, handleValidationErrors}
+module.exports = { asyncHandler, csrfProtection, handleValidationErrors}                    
