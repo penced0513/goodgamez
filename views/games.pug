@@ -1,12 +1,14 @@
 extends layout.pug
 block content
-  div
+  div#games-page
     div#games-container
       each game in games
-        div(id=`game-${game.id}`).game
-    div#genres-container
+        div.game
+          img(src=`${game.img}`, alt="" class="game-imgs" onclick=`window.location.href="/games/${game.id}"`)
+          h2(class="game-names", onclick=`window.location.href="/games/${game.id}"`)=`${game.name}`
+          h4(class="game-genres", onclick=`window.location.href="/genres/${game.Genre.id}"`)=`${game.Genre.name}`
+    div#games-genres-container
       ul
         each genre in genres
           li
             a(href=`genres/${genre.id}`)= genre.name
-  

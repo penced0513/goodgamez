@@ -1,0 +1,29 @@
+extends layout.pug
+block content
+  div#game-page
+    h1=`${game.name}`
+    div#game-container
+      div
+        img(src=`${game.img}`, alt="")
+        div 
+          h2= `Average Rating = ${averageReviewScore}`
+        div 
+          h2= `Genre: ${game.Genre.name}`
+        form(action="/") 
+      div
+        p=`${game.description}`
+      div
+        h2 Reviews
+        each review in reviews 
+          div.review-container
+            div.review-username 
+              p= `${review.User.username}`
+            div 
+              p= `${review.review}`
+
+    div#game-shelf-container
+    div#game-genre-container
+      ul
+        each genre in genres
+          li
+            a(href=`genres/${genre.id}`)= genre.name

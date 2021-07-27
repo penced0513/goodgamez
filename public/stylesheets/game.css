@@ -1,0 +1,7 @@
+.review-container  {
+    display: flex;
+}
+
+.review-username {
+    padding-right: 10px;
+}
