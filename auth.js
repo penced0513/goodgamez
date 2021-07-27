@@ -1,6 +1,6 @@
 const { User } = require("./db/models")
 
-function loginUser (req, user) {
+function loginUser (req, res, user) {
     req.session.auth = { userId: user.id }
 }
 

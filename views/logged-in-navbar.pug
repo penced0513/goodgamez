@@ -1,0 +1,11 @@
+div#nav-container
+  table
+    thead 
+      th.nav-games-btn
+        button(type="button" onclick="window.location.href='/games'") Games
+      th#nav-shelves-btn
+        button(type="button" onclick=`window.location.href='/users/${locals.user.id}/shelves'`) My Shelves 
+      th="Good Gamez"  
+      th=`Welcome ${locals.user.username}` 
+      th#nav-logout-btn
+        button(type="button" onclick="window.location.href='/logout'") Logout

@@ -1,0 +1,12 @@
+#login-form {
+    background-color: lightgray;
+    margin: auto;
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    /* position: relative; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
