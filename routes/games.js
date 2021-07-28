@@ -33,22 +33,28 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req,res) => {
     include: User
   });
 
-  const userReview = await Review.findOne({
+  let userReview;
+  if (res.locals.authenticated){
+    userReview = await Review.findOne({
     where: {
       gameId: req.params.id,
       userId: res.locals.user.id
     }
   });
+ }
 
   const genres = await Genre.findAll({
     order: [['name', 'ASC']]
   });
 
-  const shelves = await Gameshelf.findAll({
+  let shelves;
+  if (res.locals.authenticated){
+  shelves = await Gameshelf.findAll({
     where: {
       userId: res.locals.user.id
     }
   });
+ }
 
 
   let sum = 0

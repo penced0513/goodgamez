@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { asyncHandler, csrfProtection, handleValidationErrors } = require("../utils");
-const { User, Gameshelf } = require("../db/models");
+const { User, Gameshelf, JoinsGamesAndShelf } = require("../db/models");
 
 router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
     if (req.session.auth) {
@@ -39,8 +39,31 @@ router.post('/', csrfProtection, asyncHandler(async (req, res) => {
 
 router.post('/add', csrfProtection, asyncHandler(async (req, res) => {
     const { shelfId, gameId } = req.body
-    console.log(shelfId, gameId)
-    // STOPPED HERE, TRYING TO ADD TO SHELF
+    const userId = res.locals.user.id
+    const userAllShelf = await Gameshelf.findOne(
+        {where:{ 
+            userId,
+            name: "All"
+        }
+    })
+
+    const userAllShelfId = userAllShelf.id
+
+    const isInAll = await JoinsGamesAndShelf.findOne({
+        where: {
+            shelfId: userAllShelfId,
+            gameId
+        }
+    })
+
+    if (!isInAll) {
+        await JoinsGamesAndShelf.create({ shelfId:userAllShelfId , gameId})
+    }
+
+    if(shelfId != userAllShelfId){
+        await JoinsGamesAndShelf.create({ shelfId, gameId})
+    }    
+    res.redirect(`/games/${gameId}`)
 }));
 
 router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => {
