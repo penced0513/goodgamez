@@ -24,33 +24,10 @@ block content
       div
         p=`${game.description}`
       if locals.authenticated
-        if !userReview
-          input(type="hidden" id="userReview" value="")
-        div
-            h3 Leave a Review!
-            div#review-box
-              select(name="rating")  
-                option(value="1") 1 
-                option(value="2") 2 
-                option(value="3") 3 
-                option(value="4") 4 
-                option(value="5") 5 
-              div   
-                textarea(name="review", cols="30", rows="10") 
-              button(id="submitReview") Post Review
+        input(type="hidden" name="userId" value=`${locals.user.id}`, id="fetchUserId")
+        div#user-review-box
       h2 Reviews
-        if reviews.length
-          each review in reviews 
-            div.review-container
-              div.review-username 
-                p= `${review.User.username}`
-              div 
-                p= `${review.review}`
-        else 
-           div.review-container
-              div 
-                p= `No Reviews yet`
-
+        container#reviews-container
     div#game-shelf-container
     if shelves
       div#game-genre-container

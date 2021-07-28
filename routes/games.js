@@ -72,9 +72,31 @@ router.get(`/:id(\\d+)/reviews`, asyncHandler(async(req,res) => {
   const reviews = await Review.findAll({
     where: {
       gameId
-    }
+    },
+    include: User
   })
   res.json({reviews})
 }))
 
+router.post(`/:id(\\d+)/review`, asyncHandler(async(req,res) => {
+  const { userId, gameId, review, reviewScore } = req.body
+
+  const createdReview = await Review.create({ userId, gameId, review, reviewScore })
+
+  const user = await User.findByPk(userId)
+  res.json({ message: "Success", username: user.username })
+}))
+
+router.put(`/:id(\\d+)/review`, asyncHandler(async(req,res) => {
+  const { userId, gameId, review, reviewScore } = req.body
+
+  const oldReview = await Review.findOne({
+    where: {
+      userId, gameId
+  }})
+  await oldReview.Update({ userId, gameId, review, reviewScore })
+
+  const user = await User.findByPk(userId)
+  res.json({ message: "Success", username: user.username })
+}))
 module.exports = router
