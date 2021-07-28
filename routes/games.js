@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { asyncHandler,  } = require('../utils');
+const { asyncHandler, csrfProtection } = require('../utils');
 const { Game, Gameshelf, Genre, Review, User } = require("../db/models");
 
 router.get('/', asyncHandler(async(req, res, ) => {
@@ -17,37 +17,44 @@ router.get('/', asyncHandler(async(req, res, ) => {
   res.render("games", { games, genres, title: "Good Gamez - Gamez" })
 }));
 
-router.get('/:id(\\d+)', asyncHandler(async(req,res) => {
+router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req,res) => {
   const game = await Game.findOne({
     where: {
       id: req.params.id
     },
     include: Genre
     //include: Review
-  })
+  });
   
   const reviews = await Review.findAll({
     where: {
       gameId: req.params.id
     },
     include: User
-  })
+  });
 
   const userReview = await Review.findOne({
     where: {
       gameId: req.params.id,
       userId: res.locals.user.id
     }
-  })
+  });
 
   const genres = await Genre.findAll({
     order: [['name', 'ASC']]
   });
 
+  const shelves = await Gameshelf.findAll({
+    where: {
+      userId: res.locals.user.id
+    }
+  });
+
+
   let sum = 0
   reviews.forEach(review => sum += review.reviewScore)
   const averageReviewScore = sum/reviews.length
-  res.render("game", { userReview, averageReviewScore, game, reviews, genres, title:`Good Gamez - ${game.name}` } )
-}))
+  res.render("game", { userReview, averageReviewScore, game, reviews, genres, shelves, csrfToken: req.csrfToken(), title:`Good Gamez - ${game.name}` } )
+}));
 
 module.exports = router
