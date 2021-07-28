@@ -2,13 +2,19 @@ extends layout.pug
 block content
     ol.shelf: h2 My Shelves
         each shelf in shelfList
-            li: a(onclick=`window.location.href='/shelves/${shelf.Id}'`)=shelf.name
+            li: a(onclick=`window.location.href='/shelves/${shelf.id}'`)=shelf.name
         button(class='hideButton' href='#', type='button', onclick='hide()') Add Shelf
         form(class='addShelfForm' action='/shelves' method='post')
             input(type="hidden" name="_csrf" value=csrfToken)
             label(class='addShelfForm', for='newShelf') Add a shelf:
-            input(class='addShelfForm', type='text', name='newShelf')
+            input(class='addShelfForm', type='text', name='newShelf' required)
             button(class='addShelfForm', type='submit') Add
+        form(action="/shelves/:id/delete" method="post")
+            select(name="Delete")
+                option(value="" disabled selected hidden) Delete Shelf
+                each shelf in deleteList
+                    option(value=shelf.id)=shelf.name
+            button(type='submit') Delete Shelf
         script.
             let show = () => {
                 document.querySelectorAll('.addShelfForm').style.display='block'
@@ -17,3 +23,5 @@ block content
                 document.querySelector('.hideButton').style.display='none'
                 show()
             }
+
+    h1=mainShelf.name
