@@ -58,9 +58,23 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req,res) => {
 
 
   let sum = 0
-  reviews.forEach(review => sum += review.reviewScore)
-  const averageReviewScore = sum/reviews.length
+  let averageReviewScore = "Leave the first review!"
+  if (reviews.length){
+    reviews.forEach(review => sum += review.reviewScore)
+    averageReviewScore = sum/reviews.length
+  }
   res.render("game", { userReview, averageReviewScore, game, reviews, genres, shelves, csrfToken: req.csrfToken(), title:`Good Gamez - ${game.name}` } )
 }));
+
+router.get(`/:id(\\d+)/reviews`, asyncHandler(async(req,res) => {
+
+  const gameId = req.params.id
+  const reviews = await Review.findAll({
+    where: {
+      gameId
+    }
+  })
+  res.json({reviews})
+}))
 
 module.exports = router
