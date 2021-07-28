@@ -1,7 +1,7 @@
 extends layout.pug
 block content
   div#game-page
-    h1=`${game.name}`
+    h1(id="game-title")=`${game.name}`
     div#game-container
       div
         img(src=`${game.img}`, alt="")
@@ -9,7 +9,13 @@ block content
           h2= `Average Rating = ${averageReviewScore}`
         div 
           h2= `Genre: ${game.Genre.name}`
-        form(action="/") 
+          form(action="/shelves/add" method="post")
+            input(type="hidden" name="_csrf" value=csrfToken)
+            input(type="hidden" name="gameId" value=`${game.id}`)
+            select(id="shelf-selection" name="shelfId")
+              each shelf in shelves
+                option(value=`${shelf.id}`)=`${shelf.name}`
+            button(type="submit" id="addToShelfButton") Add To Shelf
       div
         p=`${game.description}`
       div
