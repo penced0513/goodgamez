@@ -3,25 +3,66 @@ block content
     ol.shelf: h2 My Shelves
         each shelf in shelfList
             li: a(onclick=`window.location.href='/shelves/${shelf.id}'`)=shelf.name
-        button(class='hideButton' href='#', type='button', onclick='hide()') Add Shelf
+        button(class='hideAddButton' href='#', type='button', onclick='hideAddButton()') Add Shelf
         form(class='addShelfForm' action='/shelves' method='post')
             input(type="hidden" name="_csrf" value=csrfToken)
             label(class='addShelfForm', for='newShelf') Add a shelf:
             input(class='addShelfForm', type='text', name='newShelf' required)
             button(class='addShelfForm', type='submit') Add
-        form(action="/shelves/:id/delete" method="post")
-            select(name="Delete")
-                option(value="" disabled selected hidden) Delete Shelf
+        form(action='/shelves/delete' method='post')
+            select(class='hideDelButton' name="shelfId")
+                option(class='hideDelButton' value="" disabled selected hidden) Delete Shelf
                 each shelf in deleteList
-                    option(value=shelf.id)=shelf.name
-            button(type='submit') Delete Shelf
-        script.
-            let show = () => {
-                document.querySelectorAll('.addShelfForm').style.display='block'
-            }
-            let hide = () => {
-                document.querySelector('.hideButton').style.display='none'
-                show()
-            }
+                    option(id=shelf.id value=shelf.id)=shelf.name
+            button(class='hideDelButton' type='button' href='#' onclick='hideDeleteButton()') Delete Shelf
+            p(id='showShelfId' class='showDelConfirm') Are you sure you want to delete this shelf?
+            input(type="hidden" name="_csrf" value=csrfToken)
+            button(class='showDelConfirm' type='submit') Yes
+            button(class='showDelConfirm' type='button') No
 
+        script.
+            let showAddForm = () => {
+                document.querySelectorAll('.addShelfForm').forEach(el => {
+                el.style.display='block'
+              })
+            }
+            let hideAddButton = () => {
+                document.querySelector('.hideAddButton').style.display='none'
+                showAddForm()
+            }
+            let showDeleteConfirm = () => {
+                //document.getElementById('.showShelfId').innerhtml=`Are you sure you want to delete ${shelf.id}`
+                document.querySelectorAll('.showDelConfirm').forEach(el =>{
+                el.style.display='block'
+                })
+            }
+            let hideDeleteButton = () => {
+                document.querySelectorAll('.hideDelButton').forEach(el => {
+                el.style.display='none'
+                })
+                showDeleteConfirm()
+            }
+            let deleteShelf = async () => {
+                await fetch('/id', {
+                    method:'delete'
+                })
+            }
     h1=mainShelf.name
+    container(class='gameListContainer')
+        each game in findGames
+            div(class='gameListDiv' id='GameID${game.id}')
+                table
+                    thead
+                        th=game.name
+                        th=Review
+                                //- form(action="/games")
+                    tbody
+                        tr
+                            td: img(src=`${game.img}`)
+                            td Review Score
+                            form(action='/shelves/deleteGame' method='post')
+                                input(type="hidden" name="_csrf" value=csrfToken)
+                                input(type="hidden" name='game' value=game.id)
+                                input(type="hidden" name='mainShelf' value=mainShelf.id)
+                                td: button(type="submit") ❌
+                            //-td=game.Review.reviewScore

@@ -1,4 +1,7 @@
-/* .addShelfForm {
+.addShelfForm {
     display:none;
-    background-color: lightblue;
-} */
+}
+
+.showDelConfirm{
+    display:none;
+}
