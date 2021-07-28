@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { asyncHandler, csrfProtection, handleValidationErrors } = require("../utils");
-const { User, Gameshelf } = require("../db/models");
+const { User, Gameshelf, JoinsGamesAndShelf } = require("../db/models");
 
 router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
     if (req.session.auth) {
@@ -26,8 +26,9 @@ router.post('/', csrfProtection, asyncHandler(async (req, res) => {
 
 router.post('/add', csrfProtection, asyncHandler(async (req, res) => {
     const { shelfId, gameId } = req.body
-    console.log(shelfId, gameId)
-    // STOPPED HERE, TRYING TO ADD TO SHELF
+    // console.log(shelfId, gameId)
+    await JoinsGamesAndShelf.create({ shelfId, gameId})
+    res.redirect(`/games/${gameId}`)
 }));
 
 module.exports = router;

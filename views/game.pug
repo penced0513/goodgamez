@@ -9,13 +9,14 @@ block content
           h2= `Average Rating = ${averageReviewScore}`
         div 
           h2= `Genre: ${game.Genre.name}`
-          form(action="/shelves/add" method="post")
-            input(type="hidden" name="_csrf" value=csrfToken)
-            input(type="hidden" name="gameId" value=`${game.id}`)
-            select(id="shelf-selection" name="shelfId")
-              each shelf in shelves
-                option(value=`${shelf.id}`)=`${shelf.name}`
-            button(type="submit" id="addToShelfButton") Add To Shelf
+          if shelves
+            form(action="/shelves/add" method="post")
+              input(type="hidden" name="_csrf" value=csrfToken)
+              input(type="hidden" name="gameId" value=`${game.id}`)
+              select(id="shelf-selection" name="shelfId")
+                each shelf in shelves
+                  option(value=`${shelf.id}`)=`${shelf.name}`
+              button(type="submit" id="addToShelfButton") Add To Shelf
       div
         p=`${game.description}`
       div
@@ -28,8 +29,9 @@ block content
               p= `${review.review}`
 
     div#game-shelf-container
-    div#game-genre-container
-      ul
-        each genre in genres
-          li
-            a(href=`genres/${genre.id}`)= genre.name
+    if shelves
+      div#game-genre-container
+        ul
+          each genre in genres
+            li
+              a(href=`genres/${genre.id}`)= genre.name
