@@ -39,8 +39,30 @@ router.post('/', csrfProtection, asyncHandler(async (req, res) => {
 
 router.post('/add', csrfProtection, asyncHandler(async (req, res) => {
     const { shelfId, gameId } = req.body
-    // console.log(shelfId, gameId)
-    await JoinsGamesAndShelf.create({ shelfId, gameId})
+    const userId = res.locals.user.id
+    const userAllShelf = await Gameshelf.findOne(
+        {where:{ 
+            userId,
+            name: "All"
+        }
+    })
+
+    const userAllShelfId = userAllShelf.id
+
+    const isInAll = await JoinsGamesAndShelf.findOne({
+        where: {
+            shelfId: userAllShelfId,
+            gameId
+        }
+    })
+
+    if (!isInAll) {
+        await JoinsGamesAndShelf.create({ shelfId:userAllShelfId , gameId})
+    }
+
+    if(shelfId != userAllShelfId){
+        await JoinsGamesAndShelf.create({ shelfId, gameId})
+    }    
     res.redirect(`/games/${gameId}`)
 }));
 
