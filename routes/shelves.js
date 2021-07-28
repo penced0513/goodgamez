@@ -28,8 +28,16 @@ router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
         const findGames = await Game.findAll({
             where: {
                 id: gameListArray,
-            },
-            includes: { Review }
+            }
+        })
+        const findReviews = await Review.findAll({
+            where: {
+                gameId: gameListArray,
+                userId
+            }
+        })
+        let reviewScoreArray = findReviews.map(el => {
+            return el.reviewScore
         })
         const deleteList = await Gameshelf.findAll({
             where: {
@@ -37,7 +45,7 @@ router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
                 removable: true
             }
         })
-        res.render('shelves', { title: 'My Shelves', csrfToken: req.csrfToken(), shelfList, mainShelf, deleteList, findGames });
+        res.render('shelves', { title: 'My Shelves', csrfToken: req.csrfToken(), shelfList, mainShelf, deleteList, findGames, reviewScoreArray });
     }
 }));
 
