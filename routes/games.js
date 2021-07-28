@@ -58,9 +58,45 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req,res) => {
 
 
   let sum = 0
-  reviews.forEach(review => sum += review.reviewScore)
-  const averageReviewScore = sum/reviews.length
+  let averageReviewScore = "Leave the first review!"
+  if (reviews.length){
+    reviews.forEach(review => sum += review.reviewScore)
+    averageReviewScore = sum/reviews.length
+  }
   res.render("game", { userReview, averageReviewScore, game, reviews, genres, shelves, csrfToken: req.csrfToken(), title:`Good Gamez - ${game.name}` } )
 }));
 
+router.get(`/:id(\\d+)/reviews`, asyncHandler(async(req,res) => {
+
+  const gameId = req.params.id
+  const reviews = await Review.findAll({
+    where: {
+      gameId
+    },
+    include: User
+  })
+  res.json({reviews})
+}))
+
+router.post(`/:id(\\d+)/review`, asyncHandler(async(req,res) => {
+  const { userId, gameId, review, reviewScore } = req.body
+
+  const createdReview = await Review.create({ userId, gameId, review, reviewScore })
+
+  const user = await User.findByPk(userId)
+  res.json({ message: "Success", username: user.username })
+}))
+
+router.put(`/:id(\\d+)/review`, asyncHandler(async(req,res) => {
+  const { userId, gameId, review, reviewScore } = req.body
+
+  const oldReview = await Review.findOne({
+    where: {
+      userId, gameId
+  }})
+  await oldReview.Update({ userId, gameId, review, reviewScore })
+
+  const user = await User.findByPk(userId)
+  res.json({ message: "Success", username: user.username })
+}))
 module.exports = router

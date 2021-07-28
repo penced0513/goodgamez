@@ -1,5 +1,9 @@
 extends layout.pug
+append head
+  //- add page specific js
+  script(src="/javascripts/game.js" type="module" )
 block content
+  input(type="hidden" name="gameId" value=`${game.id}`, id="fetchGameId")
   div#game-page
     h1(id="game-title")=`${game.name}`
     div#game-container
@@ -19,15 +23,11 @@ block content
               button(type="submit" id="addToShelfButton") Add To Shelf
       div
         p=`${game.description}`
-      div
-        h2 Reviews
-        each review in reviews 
-          div.review-container
-            div.review-username 
-              p= `${review.User.username}`
-            div 
-              p= `${review.review}`
-
+      if locals.authenticated
+        input(type="hidden" name="userId" value=`${locals.user.id}`, id="fetchUserId")
+        div#user-review-box
+      h2 Reviews
+        container#reviews-container
     div#game-shelf-container
     if shelves
       div#game-genre-container
