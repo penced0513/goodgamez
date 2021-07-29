@@ -6,10 +6,16 @@ mixin validationErrorSummary(errors)
         each error in errors
           li= error
 
-mixin field(labelText, fieldName, fieldValue, fieldType = 'text', placeholder = null)
+mixin field(labelText, fieldName, fieldValue, fieldType = 'text', placeholder = null, required = false)
   div
     label(for=fieldName)= labelText
     if fieldType === 'textarea'
-      textarea(id=fieldName name=fieldName rows='5')= fieldValue
+      if required 
+        textarea(id=fieldName name=fieldName rows='5' required)= fieldValue
+      else
+        textarea(id=fieldName name=fieldName rows='5')= fieldValue
     else
-      input(type=fieldType id=fieldName name=fieldName value=fieldValue placeholder=placeholder)
+      if required
+        input(type=fieldType id=fieldName name=fieldName value=fieldValue placeholder=placeholder required)
+      else 
+        input(type=fieldType id=fieldName name=fieldName value=fieldValue placeholder=placeholder)

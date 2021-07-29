@@ -10,7 +10,11 @@ const { validationResult } = require("express-validator");
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'a/A Express Skeleton Home' });
+  if (res.locals.authenticated) {
+    res.redirect("/shelves")
+  } else {
+    res.redirect("/games")
+  }
 });
 
 router.get('/login', csrfProtection, (req, res) => {
@@ -42,7 +46,7 @@ router.get('/logout', asyncHandler(async (req, res) => {
   await logoutUser(req, res);
   // req.session = null;
   // res.send("logged out")
-  res.redirect("/");
+  req.session.save(()=> res.redirect('/'))
 }));
 
 router.get('/signup', csrfProtection, (req, res) => {
@@ -90,18 +94,56 @@ router.post('/signup', signupValidator, csrfProtection, asyncHandler(async (req,
   const validationErrors = validationResult(req).errors.map(({ msg }) => `${msg}`);
 
   if (!validationErrors.length) {
-    const user = await User.create({ username, email, hashedPassword })
-    await Gameshelf.create({ name: 'All', userId: user.id, removable: false })
-    await Gameshelf.create({ name: 'Want to play', userId: user.id, removable: false })
-    await Gameshelf.create({ name: 'Currently Playing', userId: user.id, removable: false })
-    await Gameshelf.create({ name: 'Played', userId: user.id, removable: false })
-    loginUser(req, res, user)
-    res.redirect('/')
+    const user1 = await User.findOne({
+      where: {
+        username
+      }
+    })
+
+    const user2 = await User.findOne({
+      where: {
+        email
+      }
+    })
+
+    const errors = []
+
+    if (user1) {
+      errors.push("Username is taken")
+    }
+
+    if (user2) {
+      errors.push("Email is taken")
+    }
+
+    if (!user1 && !user2) {
+      const user = await User.create({ username, email, hashedPassword })
+      await Gameshelf.create({ name: 'All', userId: user.id, removable: false })
+      await Gameshelf.create({ name: 'Want to play', userId: user.id, removable: false })
+      await Gameshelf.create({ name: 'Currently Playing', userId: user.id, removable: false })
+      await Gameshelf.create({ name: 'Played', userId: user.id, removable: false })
+      loginUser(req, res, user)
+      res.redirect('/')
+    } else {
+
+      res.render('sign-up', { title: "Good Gamez - Sign Up", csrfToken: req.csrfToken(), validationErrors: errors, username, email })
+    }
+
   } else {
-
     res.render('sign-up', { title: "Good Gamez - Sign Up", csrfToken: req.csrfToken(), validationErrors, username, email })
-  }
+    }
 
+}))
+
+router.get('/demo', asyncHandler(async(req, res) => {
+  const user = await User.findByPk(1)
+
+  loginUser(req, res, user)
+
+  // res.locals.user = user
+  // res.locals.authenticated = true
+  
+  req.session.save(() => res.redirect('/'))
 }))
 
 module.exports = router;
