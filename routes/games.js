@@ -94,7 +94,7 @@ router.put(`/:id(\\d+)/review`, asyncHandler(async(req,res) => {
     where: {
       userId, gameId
   }})
-  await oldReview.Update({ userId, gameId, review, reviewScore })
+  await oldReview.update({ userId, gameId, review, reviewScore })
 
   const user = await User.findByPk(userId)
   res.json({ message: "Success", username: user.username })
