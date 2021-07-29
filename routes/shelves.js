@@ -30,22 +30,27 @@ router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
                 id: gameListArray,
             }
         })
-        const findReviews = await Review.findAll({
-            where: {
-                gameId: gameListArray,
-                userId
-            }
-        })
-        let reviewScoreArray = findReviews.map(el => {
-            return el.reviewScore
-        })
+        // const findReviews = await Review.findAll({
+        //     where: {
+        //         gameId: gameListArray,
+        //         userId
+        //     }
+        // })
+        // let reviewScoreArray = findReviews.map(el => {
+        //     return el.reviewScore
+        // })
         const deleteList = await Gameshelf.findAll({
             where: {
                 userId,
                 removable: true
             }
         })
-        res.render('shelves', { title: 'My Shelves', csrfToken: req.csrfToken(), shelfList, mainShelf, deleteList, findGames, reviewScoreArray });
+        const moveShelf = shelfList.filter(el => {
+            if (el.id !== mainShelf.id) {
+                return el
+            }
+        })
+        res.render('shelves', { title: 'My Shelves', csrfToken: req.csrfToken(), shelfList, mainShelf, deleteList, findGames, moveShelf });
     }
 }));
 
@@ -83,11 +88,88 @@ router.post('/add', csrfProtection, asyncHandler(async (req, res) => {
         await JoinsGamesAndShelf.create({ shelfId: userAllShelfId, gameId })
     }
 
-    if (shelfId != userAllShelfId) {
+    const findShelfById = Gameshelf.findByPk(shelfId)
+    if (!findShelfById.removable) {
+        let shelfCompare = await Gameshelf.findAll({
+            where: {
+                userId: req.session.auth.userId,
+                name: ['Want to play', 'Currently Playing', 'Played']
+            }
+        })
+        let shelfFilter = shelfCompare.filter(el => {
+            if (el.name !== findShelfById.name) {
+                return el.id
+            }
+        })
+        let filteredShelfArr = shelfFilter.map(el => {
+            return el.id
+        })
+        let finalRes = await JoinsGamesAndShelf.findAll({
+            where: {
+                shelfId: filteredShelfArr,
+                gameId
+            }
+        })
+        finalRes.forEach(el => {
+            el.destroy()
+        })
+    }
+
+    if (shelfId !== userAllShelfId) {
         await JoinsGamesAndShelf.create({ shelfId, gameId })
     }
+    // Need to find the shelf that we're adding the game on to and then see if it's removable
+    // If removable, check to make sure it's not in any other removable and destroy if it is
     res.redirect(`/games/${gameId}`)
 }));
+
+
+router.post('/move', csrfProtection, asyncHandler(async (req, res) => {
+    const { game, mainShelf, shelfId } = req.body
+
+    await JoinsGamesAndShelf.create({
+        gameId: game,
+        shelfId
+    })
+    const mainCheck = await Gameshelf.findByPk(mainShelf)
+    if (mainCheck.name !== 'All') {
+        let joinsId = await JoinsGamesAndShelf.findOne({
+            where: {
+                shelfId: mainShelf,
+                gameId: game
+            }
+        })
+        joinsId.destroy()
+    } else {
+        const shelfCheck = await Gameshelf.findByPk(shelfId)
+        if (!shelfCheck.removable) {
+            let shelfCompare = await Gameshelf.findAll({
+                where: {
+                    userId: req.session.auth.userId,
+                    name: ['Want to play', 'Currently Playing', 'Played']
+                }
+            })
+            let shelfFilter = shelfCompare.filter(el => {
+                if (el.name !== shelfCheck.name) {
+                    return el.id
+                }
+            })
+            let filteredShelfArr = shelfFilter.map(el => {
+                return el.id
+            })
+            let finalRes = await JoinsGamesAndShelf.findAll({
+                where: {
+                    shelfId: filteredShelfArr,
+                    gameId: game
+                }
+            })
+            finalRes.forEach(el => {
+                el.destroy()
+            })
+        }
+    }
+    res.redirect(`/shelves/${mainShelf}`)
+}))
 
 router.post('/delete', csrfProtection, asyncHandler(async (req, res) => {
     const { shelfId } = req.body
@@ -140,7 +222,12 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => {
                 id: gameListArray
             }
         })
-        res.render('shelves', { title: 'My Shelves', csrfToken: req.csrfToken(), shelfList, mainShelf, deleteList, findGames });
+        const moveShelf = shelfList.filter(el => {
+            if (el.id !== mainShelf.id && el.name !== 'All') {
+                return el
+            }
+        })
+        res.render('shelves', { title: 'My Shelves', csrfToken: req.csrfToken(), shelfList, mainShelf, deleteList, findGames, moveShelf });
     }
 }))
 

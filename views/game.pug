@@ -8,18 +8,19 @@ block content
     div#game-container
       div
         img(src=`${game.img}`, alt="")
-        div 
+        div
           h2= `Average Rating = ${averageReviewScore}`
-        div 
+        div
           h2= `Genre: ${game.Genre.name}`
           if shelves
             form(action="/shelves/add" method="post")
               input(type="hidden" name="_csrf" value=csrfToken)
               input(type="hidden" name="gameId" value=`${game.id}`)
-              select(id="shelf-selection" name="shelfId")
+              button(class='hideMovButton' type='button' href='#' onclick='hideMoveButton()') Add to Shelf
+              select(class='showMovDrop' id="shelf-selection" name="shelfId")
                 each shelf in shelves
-                  option(value=`${shelf.id}`)=`${shelf.name}`
-              button(type="submit" id="addToShelfButton") Add To Shelf
+                  option(class='showMovDrop' value=`${shelf.id}`)=`${shelf.name}`
+              button(class='showMovDrop' type="submit" id="addToShelfButton") Add To Shelf
       div
         p=`${game.description}`
       if locals.authenticated
@@ -34,3 +35,15 @@ block content
           each genre in genres
             li
               a(href=`genres/${genre.id}`)= genre.name
+  script.
+    let showMoveDrop = () => {
+                document.querySelectorAll('.showMovDrop').forEach(el =>{
+                el.style.display='block'
+                })
+            }
+            let hideMoveButton = () => {
+                document.querySelectorAll('.hideMovButton').forEach(el => {
+                el.style.display='none'
+                })
+                showMoveDrop()
+            }
