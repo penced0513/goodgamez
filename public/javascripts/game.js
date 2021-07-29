@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async(event) => {
 
     if (userField){
         
-        const userId = user.value
+        const userId = userField.value
         const userReview = reviews.filter(review => review.User.id == userId)
         
         if (userReview.length) {
