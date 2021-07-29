@@ -9,7 +9,6 @@ router.get('/', asyncHandler(async(req, res, ) => {
     order: [['name', 'ASC']]
   });
 
-  console.log(games[0].Genre.name)
   const genres = await Genre.findAll({
     order: [['name', 'ASC']]
   });
