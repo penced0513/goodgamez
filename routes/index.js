@@ -28,7 +28,7 @@ router.post('/login', csrfProtection, asyncHandler(async (req, res) => {
     const isPassword = await bcrypt.compare(password, user.hashedPassword)
     if (isPassword) {
       loginUser(req, res, user);
-      res.redirect("/")
+      return res.redirect("/")
     }
   }
 
