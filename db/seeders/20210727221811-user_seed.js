@@ -12,8 +12,10 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
+      
     return queryInterface.bulkInsert('Users', [
-      { username: "test1", email: 'test@test.com', hashedPassword: '$2y$12$yv0gWNtk7bcFitjRSaf.Uu2CPgS7AtyL69biAjsRLmUWtE/ORcFB.', createdAt: new Date(), updatedAt: new Date() }
+      { username: "demoUser", email: 'demo@demo.com', hashedPassword:
+      '$2y$12$DNnmF4j/bWWb8U95SnYTOON/9qCvEhgCXaG2nraFR9vP6TDHKNx22', createdAt: new Date(), updatedAt: new Date() }
     ], {});
   },
 
@@ -24,6 +26,6 @@ module.exports = {
 
       Example:
     */
-    return queryInterface.bulkDelete('Users', null, {});
+    return queryInterface.bulkDelete('Users', null, { truncate: true, cascade: true, restartIdentity: true });
   }
 };
