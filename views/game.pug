@@ -1,6 +1,5 @@
 extends layout.pug
 append head
-  //- add page specific js
   script(src="/javascripts/game.js" type="module" )
 block content
   div#game-page
@@ -30,20 +29,20 @@ block content
         container#reviews-container
     div#game-shelf-container
     if shelves
-      div#game-genre-container
-        ul
-          each genre in genres
-            li
-              a(href=`genres/${genre.id}`)= genre.name
+    div#game-genre-container
+      ul
+        each genre in genres
+          li
+            a(href=`/genres/${genre.id}`)= genre.name
   script.
     let showMoveDrop = () => {
-                document.querySelectorAll('.showMovDrop').forEach(el =>{
-                el.style.display='block'
-                })
-            }
-            let hideMoveButton = () => {
-                document.querySelectorAll('.hideMovButton').forEach(el => {
-                el.style.display='none'
-                })
-                showMoveDrop()
-            }
+      document.querySelectorAll('.showMovDrop').forEach(el =>{
+        el.style.display='block'
+      })
+    }
+    let hideMoveButton = () => {
+      document.querySelectorAll('.hideMovButton').forEach(el => {
+        el.style.display='none'
+      })
+      showMoveDrop()
+    }

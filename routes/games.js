@@ -9,7 +9,6 @@ router.get('/', asyncHandler(async(req, res, ) => {
     order: [['name', 'ASC']]
   });
 
-  console.log(games[0].Genre.name)
   const genres = await Genre.findAll({
     order: [['name', 'ASC']]
   });
@@ -81,10 +80,10 @@ router.get(`/:id(\\d+)/reviews`, asyncHandler(async(req,res) => {
 router.post(`/:id(\\d+)/review`, asyncHandler(async(req,res) => {
   const { userId, gameId, review, reviewScore } = req.body
 
-  const createdReview = await Review.create({ userId, gameId, review, reviewScore })
+  await Review.create({ userId, gameId, review, reviewScore })
 
   const user = await User.findByPk(userId)
-  res.json({ message: "Success", username: user.username })
+  res.json({ username: user.username })
 }))
 
 router.put(`/:id(\\d+)/review`, asyncHandler(async(req,res) => {
@@ -97,6 +96,19 @@ router.put(`/:id(\\d+)/review`, asyncHandler(async(req,res) => {
   await oldReview.update({ userId, gameId, review, reviewScore })
 
   const user = await User.findByPk(userId)
-  res.json({ message: "Success", username: user.username })
+  res.json({ username: user.username })
 }))
+
+router.delete(`/:id(\\d+)/review`, asyncHandler(async(req,res) => {
+  const { userId, gameId } = req.body
+
+  const oldReview = await Review.findOne({
+    where: {
+      userId, gameId
+  }})
+  await oldReview.destroy()
+
+  res.json({ message: "Success" })
+}))
+
 module.exports = router
