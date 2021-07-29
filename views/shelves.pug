@@ -59,9 +59,9 @@ block content
                     tbody
                         tr
                             td: a(href=`/games/${game.id}`): img(src=`${game.img}`)
-                            if (reviewScoreArray.length)
-                                each reviewScore in reviewScoreArray
-                                    td=reviewScore
+                            //- if (reviewScoreArray.length)
+                            //-     each reviewScore in reviewScoreArray
+                            //-         td=reviewScore
                             form(action='/shelves/deleteGame' method='post')
                                 input(type="hidden" name="_csrf" value=csrfToken)
                                 input(type="hidden" name='game' value=game.id)
