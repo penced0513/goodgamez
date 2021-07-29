@@ -1,56 +1,47 @@
 document.addEventListener('DOMContentLoaded', async(event) => {
-    
-    const userId = document.getElementById("fetchUserId").value
+   
     const gameId = document.getElementById("fetchGameId").value
 
     const reviews = await repopulateReviews(gameId)
 
-
-    const userReview = reviews.filter(review => {
-        return review.User.id == userId
-    })
-
-    if (userReview.length) {
-    
-        const userReviewBox = document.getElementById("user-review-box")
-
-        const reviewContainer = document.createElement("div")
-
-        renderReview(userReview[0].User.username, userReview[0].reviewScore, userReview[0].review, userId, gameId)
-
+    if (!document.getElementById("fetchUserId")){
+        await repopulateReviews(gameId)
 
     } else {
 
-        const userReviewBox = document.getElementById("user-review-box")
+        const userId = document.getElementById("fetchUserId").value
+        const userReview = reviews.filter(review => review.User.id == userId)
         
-        createReviewForm()
-
-        const postReviewButton = document.getElementById("submitReview")
-        postReviewButton.addEventListener("click", async(e) => {
-            e.preventDefault()
-            const ratingValue = document.getElementById("selectRating").value
-            const textReview = document.getElementById("textReview").value
-
-            const reviewData = { userId, review:textReview, reviewScore: ratingValue, gameId }
-            const postReviewFetch = await fetch(`/games/${gameId}/review`, {
-                method: "POST",
-                body: JSON.stringify(reviewData),
-                headers: {
-                  "Content-Type": "application/json"
-                }
+        if (userReview.length) {
+        
+            renderReview(userReview[0].User.username, userReview[0].reviewScore, userReview[0].review, userId, gameId)
+    
+        } else {
+           
+            createReviewForm()
+    
+            const postReviewButton = document.getElementById("submitReview")
+            postReviewButton.addEventListener("click", async(e) => {
+                e.preventDefault()
+                const ratingValue = document.getElementById("selectRating").value
+                const textReview = document.getElementById("textReview").value
+    
+                const reviewData = { userId, review:textReview, reviewScore: ratingValue, gameId }
+                const postReviewFetch = await fetch(`/games/${gameId}/review`, {
+                    method: "POST",
+                    body: JSON.stringify(reviewData),
+                    headers: {
+                      "Content-Type": "application/json"
+                    }
+                })
+    
+                const postReviewData = await postReviewFetch.json()
+                
+                await repopulateReviews(gameId)
+                renderReview(postReviewData.username, ratingValue, textReview, userId,  gameId)
             })
-
-            const postReviewData = await postReviewFetch.json()
-            
-            renderReview(postReviewData.username, ratingValue, textReview, userId,  gameId)
-
-
-            repopulateReviews(gameId)
-
-        })
-        
+        }
     }
-
 });
 
 function createReviewForm () {
@@ -68,7 +59,6 @@ function createReviewForm () {
       </div>
       <button id="submitReview">Post Review</button>
     </form>`
-
 }
 
 async function repopulateReviews(gameId) {
@@ -79,25 +69,33 @@ async function repopulateReviews(gameId) {
 
     const reviewsContainer = document.getElementById("reviews-container")
     reviewsContainer.innerHTML = ""
-        if (reviews.length) {
-            reviews.forEach(review => {
-                const reviewContainer = document.createElement("div")
+        if (!reviews.length) {
+            const reviewContainer = document.createElement("div")
 
-                const userNameContainer = document.createElement("div")
-                userNameContainer.innerText = review.User.username
-                reviewContainer.appendChild(userNameContainer)
+            const textReviewContainer = document.createElement("div")
+            textReviewContainer.innerText = "No reviews yet!"
+            reviewContainer.appendChild(textReviewContainer)
 
-                const ratingValueContainer = document.createElement("div")
-                ratingValueContainer.innerText = review.reviewScore
-                reviewContainer.appendChild(ratingValueContainer)
+            reviewsContainer.appendChild(reviewContainer)
+        } 
 
-                const textReviewContainer = document.createElement("div")
-                textReviewContainer.innerText = review.review
-                reviewContainer.appendChild(textReviewContainer)
+        reviews.forEach(review => {
+            const reviewContainer = document.createElement("div")
 
-                reviewsContainer.appendChild(reviewContainer)
-            })
-        }
+            const userNameContainer = document.createElement("div")
+            userNameContainer.innerText = review.User.username
+            reviewContainer.appendChild(userNameContainer)
+
+            const ratingValueContainer = document.createElement("div")
+            ratingValueContainer.innerText = review.reviewScore
+            reviewContainer.appendChild(ratingValueContainer)
+
+            const textReviewContainer = document.createElement("div")
+            textReviewContainer.innerText = review.review
+            reviewContainer.appendChild(textReviewContainer)
+
+            reviewsContainer.appendChild(reviewContainer)
+        })
         return reviews
 }
 
@@ -128,7 +126,6 @@ function renderReview(username, reviewScore, review, userId, gameId) {
     editButton.addEventListener("click", async(e) => {
         e.preventDefault()
 
-        // const userReviewBox = document.getElementById("user-review-box")
         createReviewForm()
 
         const submitEdit = document.getElementById("submitReview")
@@ -145,9 +142,7 @@ function renderReview(username, reviewScore, review, userId, gameId) {
                 }
             })
 
-            
-            
-            repopulateReviews(gameId)
+            await repopulateReviews(gameId)
             
             const postReviewData = await editReviewFetch.json()
             renderReview(postReviewData.username, ratingValue, textReview, userId, gameId )
