@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', async(event) => {
 
     if (!document.getElementById("fetchUserId")){
         await repopulateReviews(gameId)
-
     } else {
 
         const userId = document.getElementById("fetchUserId").value
@@ -102,22 +101,19 @@ async function repopulateReviews(gameId) {
 function renderReview(username, reviewScore, review, userId, gameId) {
     
     const userReviewBox = document.getElementById("user-review-box")
-
-    const reviewContainer = document.createElement("div")
+    userReviewBox.innerHTML = ""
 
     const userNameContainer = document.createElement("div")
     userNameContainer.innerText = username
-    reviewContainer.appendChild(userNameContainer)
+    userReviewBox.appendChild(userNameContainer)
 
     const ratingValueContainer = document.createElement("div")
     ratingValueContainer.innerText = reviewScore
-    reviewContainer.appendChild(ratingValueContainer)
+    userReviewBox.appendChild(ratingValueContainer)
 
     const textReviewContainer = document.createElement("div")
     textReviewContainer.innerText = review
-    reviewContainer.appendChild(textReviewContainer)
-
-    userReviewBox.innerHTML = reviewContainer.innerHTML
+    userReviewBox.appendChild(textReviewContainer)
 
     const editButton = document.createElement("button")
     editButton.innerText = "Edit"
