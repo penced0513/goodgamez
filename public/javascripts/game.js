@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', async(event) => {
-   
-    const gameId = document.getElementById("fetchGameId").value
-    
+
+    const gameId = document.URL.split("/")[4]
+
     const reviews = await repopulateReviews(gameId)
     
     const userField = document.getElementById("fetchUserId")
 
     if (userField){
         
-        const userId = user.value
+        const userId = userField.value
         const userReview = reviews.filter(review => review.User.id == userId)
         
         if (userReview.length) {
@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', async(event) => {
     
                 const postReviewData = await postReviewFetch.json()
                 
-                await repopulateReviews(gameId)
                 renderReview(postReviewData.username, ratingValue, textReview, userId,  gameId)
             })
         }
