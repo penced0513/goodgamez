@@ -5,3 +5,7 @@
 .review-username {
     padding-right: 10px;
 }
+
+.showMovDrop {
+    display:none;
+}

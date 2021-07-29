@@ -10,16 +10,45 @@ block content
             input(class='addShelfForm', type='text', name='newShelf' required)
             button(class='addShelfForm', type='submit') Add
         form(action='/shelves/delete' method='post')
-            select(class='hideDelButton' name="shelfId")
-                option(class='hideDelButton' value="" disabled selected hidden) Delete Shelf
-                each shelf in deleteList
-                    option(id=shelf.id value=shelf.id)=shelf.name
             button(class='hideDelButton' type='button' href='#' onclick='hideDeleteButton()') Delete Shelf
             p(id='showShelfId' class='showDelConfirm') Are you sure you want to delete this shelf?
+            select(class='showDelConfirm' name="shelfId")
+                each shelf in deleteList
+                    option(class='showDelConfirm' id=shelf.id value=shelf.id)=shelf.name
             input(type="hidden" name="_csrf" value=csrfToken)
             button(class='showDelConfirm' type='submit') Yes
-            button(class='showDelConfirm' type='button') No
+            button(class='showDelConfirm' type='button' onclick='hideDeleteConfirm()') No
+    h1=mainShelf.name
+    container(class='gameListContainer')
+        each game in findGames
+            div(class='gameListDiv' id='GameID${game.id}')
+                table
+                    thead
+                        th=game.name
+                        th=Review
+                    tbody
+                        tr
+                            td: a(href=`/games/${game.id}`): img(src=`${game.img}`)
+                            td: form(action='/shelves/move' method='post')
+                                    input(type="hidden" name="_csrf" value=csrfToken)
+                                    input(type="hidden" name='game' value=game.id)
+                                    input(type="hidden" name='mainShelf' value=mainShelf.id)
+                                    button(class='hideMovButton' type='button' href='#' onclick='hideMoveButton()') Move Shelf
+                                    select(class='showMovDrop' name="shelfId")
+                                        each shelf in moveShelf
+                                            option(id=shelf.id value=shelf.id)=shelf.name
+                                    button(class='showMovDrop' type="submit") ✔️
 
+
+                            form(action='/shelves/deleteGame' method='post')
+                                input(type="hidden" name="_csrf" value=csrfToken)
+                                input(type="hidden" name='game' value=game.id)
+                                input(type="hidden" name='mainShelf' value=mainShelf.id)
+                                td: button(type="submit") ❌
+                            //- if (reviewScoreArray.length)
+                            //-     each reviewScore in reviewScoreArray
+                            //-         td=reviewScore
+                            //-td=game.Review.reviewScore
         script.
             let showAddForm = () => {
                 document.querySelectorAll('.addShelfForm').forEach(el => {
@@ -30,41 +59,33 @@ block content
                 document.querySelector('.hideAddButton').style.display='none'
                 showAddForm()
             }
-            let showDeleteConfirm = () => {
+            let showDeleteConfirm = (block) => {
                 //document.getElementById('.showShelfId').innerhtml=`Are you sure you want to delete ${shelf.id}`
                 document.querySelectorAll('.showDelConfirm').forEach(el =>{
+                el.style.display = block
+                })
+            }
+
+            let hideDeleteConfirm = () => {
+                let block = 'none'
+                let none = 'block'
+                hideDeleteButton(block, none)
+            }
+
+            let hideDeleteButton = (block='block', none='none') => {
+                document.querySelectorAll('.hideDelButton').forEach(el => {
+                el.style.display = none
+                })
+                showDeleteConfirm(block)
+            }
+            let showMoveDrop = () => {
+                document.querySelectorAll('.showMovDrop').forEach(el =>{
                 el.style.display='block'
                 })
             }
-            let hideDeleteButton = () => {
-                document.querySelectorAll('.hideDelButton').forEach(el => {
+            let hideMoveButton = () => {
+                document.querySelectorAll('.hideMovButton').forEach(el => {
                 el.style.display='none'
                 })
-                showDeleteConfirm()
+                showMoveDrop()
             }
-            let deleteShelf = async () => {
-                await fetch('/id', {
-                    method:'delete'
-                })
-            }
-    h1=mainShelf.name
-    container(class='gameListContainer')
-        each game in findGames
-            div(class='gameListDiv' id='GameID${game.id}')
-                table
-                    thead
-                        th=game.name
-                        th=Review
-                                //- form(action="/games")
-                    tbody
-                        tr
-                            td: a(href=`/games/${game.id}`): img(src=`${game.img}`)
-                            //- if (reviewScoreArray.length)
-                            //-     each reviewScore in reviewScoreArray
-                            //-         td=reviewScore
-                            form(action='/shelves/deleteGame' method='post')
-                                input(type="hidden" name="_csrf" value=csrfToken)
-                                input(type="hidden" name='game' value=game.id)
-                                input(type="hidden" name='mainShelf' value=mainShelf.id)
-                                td: button(type="submit") ❌
-                            //-td=game.Review.reviewScore
