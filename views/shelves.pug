@@ -10,7 +10,8 @@ block content
             input(class='addShelfForm', type='text', name='newShelf' required)
             button(class='addShelfForm', type='submit') Add
         form(action='/shelves/delete' method='post')
-            button(class='hideDelButton' type='button' href='#' onclick='hideDeleteButton()') Delete Shelf
+            if deleteList.length
+                button(class='hideDelButton' type='button' href='#' onclick='hideDeleteButton()') Delete Shelf
             p(id='showShelfId' class='showDelConfirm') Are you sure you want to delete this shelf?
             select(class='showDelConfirm' name="shelfId")
                 each shelf in deleteList
