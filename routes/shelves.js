@@ -127,12 +127,13 @@ router.post('/add', csrfProtection, asyncHandler(async (req, res) => {
 router.post('/move', csrfProtection, asyncHandler(async (req, res) => {
     const { game, mainShelf, shelfId } = req.body
 
+    const shelfCheck = await Gameshelf.findByPk(shelfId)
     await JoinsGamesAndShelf.create({
         gameId: game,
         shelfId
     })
     const mainCheck = await Gameshelf.findByPk(mainShelf)
-    if (mainCheck.name !== 'All') {
+    if (mainCheck.name !== 'All' && !mainCheck.removable && !shelfCheck.removable) {
         let joinsId = await JoinsGamesAndShelf.findOne({
             where: {
                 shelfId: mainShelf,
@@ -141,7 +142,6 @@ router.post('/move', csrfProtection, asyncHandler(async (req, res) => {
         })
         joinsId.destroy()
     } else {
-        const shelfCheck = await Gameshelf.findByPk(shelfId)
         if (!shelfCheck.removable) {
             let shelfCompare = await Gameshelf.findAll({
                 where: {
@@ -235,6 +235,7 @@ router.post('/deleteGame', csrfProtection, asyncHandler(async (req, res) => {
     const { game, mainShelf } = req.body
 
     let shelf = await Gameshelf.findByPk(mainShelf)
+    console.log(shelf)
     if (shelf.name !== 'All') {
         let gameDel = await JoinsGamesAndShelf.findAll({
             where: {
