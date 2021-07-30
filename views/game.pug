@@ -8,7 +8,7 @@ block content
       div
         img(src=`${game.img}`, alt="")
         div
-          h2= `Average Rating = ${averageReviewScore}`
+          h2= `Average Rating: ${averageReviewScore}`
         div
           h2= `Genre: ${game.Genre.name}`
           if shelves
@@ -28,7 +28,10 @@ block content
       h2 Reviews
         container#reviews-container
     div#game-shelf-container
-    if shelves
+      if shelves
+        ul 
+          each shelf in shelves
+            li(onclick=`window.location.href="/shelves/${shelf.id}"`)= `${shelf.name}`
     div#game-genre-container
       ul
         each genre in genres
