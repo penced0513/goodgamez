@@ -44,11 +44,15 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req,res) => {
   const genres = await Genre.findAll({
     order: [['name', 'ASC']]
   });
-  const shelves = await Gameshelf.findAll({
-    where: {
-      userId: res.locals.user.id
-    }
-  })
+  let shelves
+  if (res.locals.authenticated){
+
+    shelves = await Gameshelf.findAll({
+      where: {
+        userId: res.locals.user.id
+      }
+    })
+  }
   let containedShelves = [];
   if (res.locals.authenticated){
     const shelves = await Gameshelf.findAll({
