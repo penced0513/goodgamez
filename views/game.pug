@@ -28,10 +28,13 @@ block content
       h2 Reviews
         container#reviews-container
     div#game-shelf-container
-      if shelves
-        ul 
-          each shelf in shelves
-            li(onclick=`window.location.href="/shelves/${shelf.id}"`)= `${shelf.name}`
+      ul 
+        li= "Currently in"
+        if containedShelves.length
+          each shelf in containedShelves
+            li(onclick=`window.location.href="/shelves/${shelf.id}"`)= `${shelf.name} shelf`
+        else 
+          li= "Not in any shelf"
     div#game-genre-container
       ul
         each genre in genres

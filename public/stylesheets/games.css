@@ -21,18 +21,4 @@ nav.navbar-container{
 
 #games-genres-container {
     grid-area: genres;
-}
 
-.game-names{
-    font-weight: bold;
-}
-
-.game-names:hover,
-.game-genres:hover {
-    color: rebeccapurple;
-    cursor:pointer;
-}
-
-.game-imgs:hover {
-    cursor:pointer;
-}

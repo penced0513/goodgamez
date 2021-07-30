@@ -44,7 +44,15 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req,res) => {
   const genres = await Genre.findAll({
     order: [['name', 'ASC']]
   });
+  let shelves
+  if (res.locals.authenticated){
 
+    shelves = await Gameshelf.findAll({
+      where: {
+        userId: res.locals.user.id
+      }
+    })
+  }
   let containedShelves = [];
   if (res.locals.authenticated){
     const shelves = await Gameshelf.findAll({
@@ -57,7 +65,9 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req,res) => {
     shelves.forEach(shelf => {
       const games = shelf.Games
       const game = games.filter(game => game.id == req.params.id)
+      console.log(game)
       if(game.length) {
+        console.log(shelf.name)
         containedShelves.push(shelf)
       }
     })
@@ -70,7 +80,7 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req,res) => {
     reviews.forEach(review => sum += review.reviewScore)
     averageReviewScore = sum/reviews.length
   }
-  res.render("game", { userReview, averageReviewScore, game, reviews, genres, shelves: containedShelves, csrfToken: req.csrfToken(), title:`Good Gamez - ${game.name}` } )
+  res.render("game", { userReview, averageReviewScore, game, reviews, genres, shelves, containedShelves, csrfToken: req.csrfToken(), title:`Good Gamez - ${game.name}` } )
 }));
 
 router.get(`/:id(\\d+)/reviews`, asyncHandler(async(req,res) => {
