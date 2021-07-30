@@ -1,6 +1,26 @@
-/* #games-page { 
-    display: flex;
-    justify-content: space-between;
+/* body {
+    display: grid;
+    grid-template-rows: .05fr 1fr;
+    grid-template-areas: "header body";
+} */
+
+nav.navbar-container{
+    grid-area: header;
+}
+
+ #games-page {
+    grid-area: body;
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    grid-template-areas: "games genres";
+}
+
+#games-container {
+    grid-area: games;
+}
+
+#games-genres-container {
+    grid-area: genres;
 }
 
 .game-names{
@@ -13,6 +33,6 @@
     cursor:pointer;
 }
 
-.game-imgs:hover { 
+.game-imgs:hover {
     cursor:pointer;
-} */
+}
