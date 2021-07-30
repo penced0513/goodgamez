@@ -1,10 +1,16 @@
 @import "reset.css";
+@import "nav.css";
 @import "log-in.css";
 @import "sign-up.css";
 @import "shelves.css";
 @import "games.css";
 @import "game.css";
-@import "nav.css";
 h1 {
-    color: #555555;
+  color: white;
+}
+
+body:not(.shelfBody) {
+  background: linear-gradient(574deg, #282828, #282828, #282828, #9146ff);
+  color: white;
+  overflow: scroll;
 }

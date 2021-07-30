@@ -1,33 +1,32 @@
- body {
-   background-color: hotpink;
- }
+body {
+  background-color: hotpink;
+}
 
- /* This is the entire nav bar as a whole */
- container.nav-container {
+/* This is the entire nav bar as a whole */
+container.nav-container {
+  position: sticky;
+  top: 0;
   width: 100%;
-  background-color: blue;
   border-bottom: 1px solid darkorange;
- }
+}
 
- /*navbar elements? */
+/*navbar elements? */
 
 thead#nav-head {
-
+  background-color: white;
+  z-index: 1;
   border: 3px solid peachpuff;
 }
 
 table {
-
-  width: 100%
+  width: 100%;
 }
-
 
 tr#nav-row {
   display: grid;
-  grid-template-columns: 1fr 1fr .5fr 3fr 1.5fr 1fr ;
+  grid-template-columns: 1fr 1fr 0.5fr 3fr 1.5fr 1fr;
   grid-template-areas: "games shelves . logo user logout";
 }
-
 
 /*This selects all buttons*/
 button.nav-buttons {
@@ -61,34 +60,33 @@ th#nav-logout-btn {
 }
 
 /* This is the entire body that contains all games */
- #games-container {
+#games-container {
   border: 20px solid darkgreen;
- }
+}
 
-
- /* This is the row the game is in */
- .game {
+/* This is the row the game is in */
+.game {
   border: 20px solid purple;
- }
+}
 
- /* This is the area around each individual game */
- .game-imgs {
+/* This is the area around each individual game */
+.game-imgs {
   border: 20px solid orange;
- }
+}
 
- /* This is the area around the game name */
- .game-names {
+/* This is the area around the game name */
+.game-names {
   border: 5px solid blue;
- }
+}
 
-  /* This is the area around the game genre text */
- .game-genres {
+/* This is the area around the game genre text */
+.game-genres {
   border: 5px solid pink;
- }
+}
 
- /* This makes each button in the nav pop when hovered over */
+/* This makes each button in the nav pop when hovered over */
 .nav-buttons:hover {
   cursor: pointer;
   font-size: 95%;
-  animation: blink .5s ease-out alternate infinite;
+  animation: blink 0.5s ease-out alternate infinite;
 }
