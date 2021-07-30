@@ -10,7 +10,7 @@ module.exports = {
       },
       review: {
         allowNull: false,
-        type: Sequelize.TEXT
+        type: Sequelize.STRING(1000)
       },
       reviewScore: {
         allowNull: false,
