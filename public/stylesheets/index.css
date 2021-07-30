@@ -4,7 +4,7 @@
 @import "shelves.css";
 @import "games.css";
 @import "game.css";
-
+@import "nav.css";
 h1 {
     color: #555555;
 }

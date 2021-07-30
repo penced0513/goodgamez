@@ -1,0 +1,23 @@
+ .nav-container {
+  display: flex;
+  background-color: lightgray;
+}
+
+.nav-container > table {
+  width: 100%;
+} 
+
+#nav-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-buttons {
+}
+
+.nav-buttons:hover {
+  cursor: pointer;
+  font-size: 95%;
+  animation: blink .5s ease-out alternate infinite;
+}
