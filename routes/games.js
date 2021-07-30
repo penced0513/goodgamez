@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { asyncHandler, csrfProtection } = require('../utils');
-const { Game, Gameshelf, Genre, Review, User } = require("../db/models");
+const { Game, Gameshelf, Genre, Review, User, JoinsGamesAndShelf } = require("../db/models");
 
 router.get('/', asyncHandler(async(req, res, ) => {
   const games = await Game.findAll({
@@ -22,7 +22,6 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req,res) => {
       id: req.params.id
     },
     include: Genre
-    //include: Review
   });
   
   const reviews = await Review.findAll({
@@ -46,15 +45,24 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req,res) => {
     order: [['name', 'ASC']]
   });
 
-  let shelves;
+  let containedShelves = [];
   if (res.locals.authenticated){
-  shelves = await Gameshelf.findAll({
-    where: {
-      userId: res.locals.user.id
-    }
-  });
- }
+    const shelves = await Gameshelf.findAll({
+      include: {
+        model: Game,
+      },
+      where: { userId: res.locals.user.id },
+    })
 
+    shelves.forEach(shelf => {
+      const games = shelf.Games
+      const game = games.filter(game => game.id == req.params.id)
+      if(game.length) {
+        containedShelves.push(shelf)
+      }
+    })
+  }
+ 
 
   let sum = 0
   let averageReviewScore = "Leave the first review!"
@@ -62,7 +70,7 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req,res) => {
     reviews.forEach(review => sum += review.reviewScore)
     averageReviewScore = sum/reviews.length
   }
-  res.render("game", { userReview, averageReviewScore, game, reviews, genres, shelves, csrfToken: req.csrfToken(), title:`Good Gamez - ${game.name}` } )
+  res.render("game", { userReview, averageReviewScore, game, reviews, genres, shelves: containedShelves, csrfToken: req.csrfToken(), title:`Good Gamez - ${game.name}` } )
 }));
 
 router.get(`/:id(\\d+)/reviews`, asyncHandler(async(req,res) => {

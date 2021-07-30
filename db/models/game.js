@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     Game.belongsTo(models.Genre, { foreignKey: "genreId" })
     Game.hasMany(models.Review, { foreignKey: "gameId" })
     const columnMapping = {
-      through: "Joinsgamesandshelf",
+      through: "JoinsGamesAndShelf",
       foreignKey: "gameId",
       otherKey: "shelfId",
     };

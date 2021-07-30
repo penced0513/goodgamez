@@ -34,7 +34,7 @@ function createReviewForm (rating = 1) {
         <option value="5">5 </option>
       </select>
       <div>  
-        <textarea id="textReview" cols="30" rows="10"> </textarea>
+        <textarea id="textReview" cols="30" rows="10" required> </textarea>
       </div>
       <button id="submitReview">Post Review</button>
     </form>`
@@ -67,7 +67,7 @@ async function repopulateReviews(gameId) {
             reviewContainer.appendChild(userNameContainer)
 
             const ratingValueContainer = document.createElement("div")
-            ratingValueContainer.innerText = review.reviewScore
+            ratingValueContainer.innerText = `Rating: ${review.reviewScore}`
             reviewContainer.appendChild(ratingValueContainer)
 
             const textReviewContainer = document.createElement("div")
