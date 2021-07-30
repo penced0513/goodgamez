@@ -70,13 +70,13 @@ const signupValidator = [
     .isLength({ min: 8 })
     .withMessage("Password must be at least 8 characters long")
     .matches(/(.*[a-z])/)
-    .withMessage("Must contain a lowercase letter")
+    .withMessage("Password must contain a lowercase letter")
     .matches(/(.*[A-Z])/)
-    .withMessage("Must contain an uppercase letter")
+    .withMessage("Password must contain an uppercase letter")
     .matches(/(.*[0-9])/)
-    .withMessage("Must contain a number")
+    .withMessage("Password must contain a number")
     .matches(/(.*[!@#$%^&*])/)
-    .withMessage("Must contain a special character(!@#$%^&*)"),
+    .withMessage("Password ust contain a special character(!@#$%^&*)"),
   check("confirmedPassword")
     .custom((confirmedPassword, { req }) => {
       if (confirmedPassword !== req.body.password) {

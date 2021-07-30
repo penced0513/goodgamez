@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   Gameshelf.associate = function (models) {
     Gameshelf.belongsTo(models.User, { foreignKey: "userId" })
     const columnMapping = {
-      through: "Joinsgamesandshelf",
+      through: "JoinsGamesAndShelf",
       foreignKey: "shelfId",
       otherKey: "gameId"
     }
