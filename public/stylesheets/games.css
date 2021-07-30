@@ -1,18 +1,24 @@
-#games-page { 
-    display: flex;
-    justify-content: space-between;
+/* body {
+    display: grid;
+    grid-template-rows: .05fr 1fr;
+    grid-template-areas: "header body";
+} */
+
+nav.navbar-container{
+    grid-area: header;
 }
 
-.game-names{
-    font-weight: bold;
+ #games-page {
+    grid-area: body;
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    grid-template-areas: "games genres";
 }
 
-.game-names:hover,
-.game-genres:hover {
-    color: rebeccapurple;
-    cursor:pointer;
+#games-container {
+    grid-area: games;
 }
 
-.game-imgs:hover { 
-    cursor:pointer;
-}
+#games-genres-container {
+    grid-area: genres;
+
