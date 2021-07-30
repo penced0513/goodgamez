@@ -22,7 +22,8 @@ module.exports = {
       { name: 'Survival and Horror', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Platformer', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Simulation', createdAt: new Date(), updatedAt: new Date() },
-      { name: 'Fighting', createdAt: new Date(), updatedAt: new Date() }
+      { name: 'Fighting', createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Roguelike', createdAt: new Date(), updatedAt: new Date() }
     ], {});
   },
 
