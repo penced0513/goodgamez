@@ -65,7 +65,9 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req,res) => {
     shelves.forEach(shelf => {
       const games = shelf.Games
       const game = games.filter(game => game.id == req.params.id)
+      console.log(game)
       if(game.length) {
+        console.log(shelf.name)
         containedShelves.push(shelf)
       }
     })
