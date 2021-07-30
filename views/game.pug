@@ -28,7 +28,7 @@ block content
       h2 Reviews
         container#reviews-container
     div#game-shelf-container
-      if shelves
+      if containedShelves
         ul 
           each shelf in shelves
             li(onclick=`window.location.href="/shelves/${shelf.id}"`)= `${shelf.name}`
