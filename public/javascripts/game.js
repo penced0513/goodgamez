@@ -34,7 +34,7 @@ function createReviewForm (rating = 1) {
         <option value="5">5 </option>
       </select>
       <div>  
-        <textarea id="textReview" cols="30" rows="10" required> </textarea>
+        <textarea id="textReview" cols="30" rows="10" required></textarea>
       </div>
       <button id="submitReview">Post Review</button>
     </form>`
@@ -129,18 +129,24 @@ function renderUserReview(username, reviewScore, review, userId, gameId) {
             const ratingValue = document.getElementById("selectRating").value
             const textReview = document.getElementById("textReview").value
             
-            const reviewData = { userId, review:textReview, reviewScore: ratingValue, gameId }
-            await fetch(`/games/${gameId}/review`, {
-                method: "PUT",
-                body: JSON.stringify(reviewData),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-            
-            await repopulateReviews(gameId)
-            
-            renderUserReview(username, ratingValue, textReview, userId, gameId )
+            if (textReview && textReview !== "Please write a review") {
+                const reviewData = { userId, review:textReview, reviewScore: ratingValue, gameId }
+                await fetch(`/games/${gameId}/review`, {
+                    method: "PUT",
+                    body: JSON.stringify(reviewData),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                
+                await repopulateReviews(gameId)
+                
+                renderUserReview(username, ratingValue, textReview, userId, gameId )
+            } else  {
+                const textReviewElement = document.getElementById("textReview")
+                textReviewElement.value = "Please write a review"
+                textReviewElement.style.border = "1px solid red"
+            }
         })
     })
 
@@ -172,19 +178,25 @@ async function makeButtonPost(gameId, userId) {
         const ratingValue = document.getElementById("selectRating").value
         const textReview = document.getElementById("textReview").value
 
-        const reviewData = { userId, review:textReview, reviewScore: ratingValue, gameId }
-        const postReviewFetch = await fetch(`/games/${gameId}/review`, {
-            method: "POST",
-            body: JSON.stringify(reviewData),
-            headers: {
-              "Content-Type": "application/json"
-            }
-        })
-
-        const postReviewData = await postReviewFetch.json()
-        
-        renderUserReview(postReviewData.username, ratingValue, textReview, userId,  gameId)
-
-        repopulateReviews(gameId)
+        if (textReview && textReview !== "Please write a review") {
+            const reviewData = { userId, review:textReview, reviewScore: ratingValue, gameId }
+            const postReviewFetch = await fetch(`/games/${gameId}/review`, {
+                method: "POST",
+                body: JSON.stringify(reviewData),
+                headers: {
+                  "Content-Type": "application/json"
+                }
+            })
+    
+            const postReviewData = await postReviewFetch.json()
+            
+            renderUserReview(postReviewData.username, ratingValue, textReview, userId,  gameId)
+    
+            repopulateReviews(gameId)
+        } else  {
+            const textReviewElement = document.getElementById("textReview")
+            textReviewElement.value = "Please write a review"
+            textReviewElement.style.border = "1px solid red"
+        }
     })
 }
