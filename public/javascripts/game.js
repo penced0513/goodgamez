@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async(event) => {
 
 function createReviewForm (rating = 1) {
     const userReviewBox = document.getElementById("user-review-box")
-    userReviewBox.innerHTML = `<h3 id="reviewHeader">Leave a Review!</h3>
+    userReviewBox.innerHTML = `<h2 id="reviewHeader">Leave a Review!</h2>
       <select id="selectRating">
         <option hidden selected value="${rating}">${rating}</option>
         <option value="1">1 </option>
@@ -38,6 +38,18 @@ function createReviewForm (rating = 1) {
       </div>
       <button id="submitReview">Post Review</button>
     </form>`
+    userReviewBox.setAttribute("style", `
+    grid-area: user-review;
+    text-align: center;
+    `)
+    const reviewHeader = document.getElementById("reviewHeader")
+    reviewHeader.setAttribute("style", `
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.7em;
+    border-bottom: .05em solid lightgray;
+    color: #f0e6e6;
+    `)
 }
 
 // Renders reviews on page
@@ -61,6 +73,8 @@ async function repopulateReviews(gameId) {
         } 
 
         reviews.forEach(review => {
+            const reviewContainer = document.createElement("div")
+
             const userAndRatingContainer = document.createElement("div")
 
             const userNameContainer = document.createElement("div")
@@ -70,14 +84,16 @@ async function repopulateReviews(gameId) {
             const ratingValueContainer = document.createElement("div")
             ratingValueContainer.innerText = `Rating: ${review.reviewScore}`
             userAndRatingContainer.appendChild(ratingValueContainer)
-
-            reviewsContainer.appendChild(userAndRatingContainer)
             userAndRatingContainer.setAttribute("style", "grid-area: user-div")
+
+            reviewContainer.appendChild(userAndRatingContainer)
+            reviewContainer.setAttribute("style", 'display: grid; grid-template-areas: "user-div review"; grid-template-columns: 15% 85%; margin-bottom: 2em')
 
             const textReviewContainer = document.createElement("div")
             textReviewContainer.innerText = review.review
-            reviewsContainer.appendChild(textReviewContainer)
-            textReviewContainer.setAttribute("style", "grid-area: review")
+            reviewContainer.appendChild(textReviewContainer)
+            textReviewContainer.setAttribute("style", "grid-area: review; word-wrap: break-word")
+            reviewsContainer.appendChild(reviewContainer)
         })
         return reviews
 }
@@ -88,21 +104,33 @@ function renderUserReview(username, reviewScore, review, userId, gameId) {
     const userReviewBox = document.getElementById("user-review-box")
     userReviewBox.innerHTML = ""
 
-    const userNameContainer = document.createElement("div")
-    userNameContainer.innerText = username
+    const userNameContainer = document.createElement("h2")
+    userNameContainer.innerText = "Your Review"
     userReviewBox.appendChild(userNameContainer)
+    userNameContainer.setAttribute("style", `
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.7em;
+    border-bottom: .05em solid lightgray;
+    color: #f0e6e6;
+    `)
 
     const ratingValueContainer = document.createElement("div")
-    ratingValueContainer.innerText = reviewScore
+    ratingValueContainer.innerText = `Rating: ${reviewScore}`
+    ratingValueContainer.setAttribute("style", "margin-bottom: 1em; margin-top: 0.3em")
     userReviewBox.appendChild(ratingValueContainer)
 
     const textReviewContainer = document.createElement("div")
     textReviewContainer.innerText = review
+    textReviewContainer.setAttribute("style", "word-wrap: break-word; text-align: left; overflow-y: scroll")
     userReviewBox.appendChild(textReviewContainer)
 
     const editButton = document.createElement("button")
     editButton.innerText = "Edit"
     userReviewBox.appendChild(editButton)
+
+    // const editAndDeleteBtn = document.createElement("div")
+    // editAndDeleteBtn.appendChild(editButton)
 
     editButton.addEventListener("click", async(e) => {
         e.preventDefault()
@@ -133,18 +161,23 @@ function renderUserReview(username, reviewScore, review, userId, gameId) {
             const textReview = document.getElementById("textReview").value
             
             if (textReview && textReview !== "Please write a review") {
-                const reviewData = { userId, review:textReview, reviewScore: ratingValue, gameId }
-                await fetch(`/games/${gameId}/review`, {
-                    method: "PUT",
-                    body: JSON.stringify(reviewData),
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                })
-                
-                await repopulateReviews(gameId)
-                
-                await renderUserReview(username, ratingValue, textReview, userId, gameId )
+                if (textReview.length > 1000) {
+                    alert("Review must be 1000 characters or less")
+                } else {
+                    const reviewData = { userId, review:textReview, reviewScore: ratingValue, gameId }
+                    await fetch(`/games/${gameId}/review`, {
+                        method: "PUT",
+                        body: JSON.stringify(reviewData),
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    })
+                    
+                    await repopulateReviews(gameId)
+                    
+                    await renderUserReview(username, ratingValue, textReview, userId, gameId )
+                }
+
             } else  {
                 const textReviewElement = document.getElementById("textReview")
                 textReviewElement.value = "Please write a review"
@@ -155,7 +188,10 @@ function renderUserReview(username, reviewScore, review, userId, gameId) {
 
     const deleteButton = document.createElement("button")
     deleteButton.innerText = "Delete"
+    // editAndDeleteBtn.appendChild(deleteButton)
+    // userReviewBox.appendChild(editAndDeleteBtn)
     userReviewBox.appendChild(deleteButton)
+    userReviewBox.setAttribute("style", `grid-area: user-review `)
 
     deleteButton.addEventListener("click", async (e) => {
         e.preventDefault()
@@ -172,6 +208,10 @@ function renderUserReview(username, reviewScore, review, userId, gameId) {
         await makeButtonPost(gameId, userId)
         await repopulateReviews(gameId)
     })
+
+    // if (review.length < 49) {
+    //     editAndDeleteBtn.setAttribute("style", "display: flex")
+    // } 
 }
 
 async function makeButtonPost(gameId, userId) {
