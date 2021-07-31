@@ -5,7 +5,7 @@ block content
     +validationErrorSummary(errors)
     form(action="/login", method="post")
       input(type="hidden" name="_csrf" value=csrfToken)
-      +field("Username", "username", username, "text", "Enter Username", true)
-      +field("Password", "password", "", "password", "Enter Password", true)
-      button(type="Submit") Log In
-    a(href="/signup") Don't have an account? Register here!
+      +field("Username: ", "username", username, "text", "Enter Username", true)
+      +field("Password: ", "password", "", "password", "Enter Password", true)
+      button(class='loginbutton' type="Submit") Log In
+    a(href="/signup" class='signupnotif') Don't have an account? Register here!

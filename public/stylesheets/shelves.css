@@ -27,6 +27,7 @@
 
 .gameListDiv > table > tbody > tr > td > a > img {
   height: fit-content;
+  position: static;
 }
 .gameListDiv > table > tbody > tr > td > a > img:hover {
   height: fit-content;
@@ -37,7 +38,7 @@
   text-align: center;
 }
 .gameListDiv > table {
-  scroll-snap-align: start;
+  scroll-snap-align: end;
   background: linear-gradient(420deg, #9146ff, #282828);
   border-radius: 1rem;
   padding: 5px;
@@ -88,6 +89,12 @@
   background: transparent;
   color: lightgray;
 }
+
+#move-dropdown > * {
+  background-image: transparent;
+  color: #282828;
+}
+
 #move-dropdown-button {
   background-color: transparent;
   border-color: transparent;
@@ -165,6 +172,15 @@
   font-size: 16px;
   color: lightgray;
 }
+
+#del-dropdown > * {
+  width: 100%;
+  background-color: transparent;
+  border-color: transparent;
+  font-size: 16px;
+  color: #282828;
+}
+
 #del-buttons-yes {
   background-color: transparent;
   font-size: 16px;
