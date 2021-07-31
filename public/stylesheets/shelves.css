@@ -1,11 +1,172 @@
 .addShelfForm {
-    display:none;
+  display: none;
 }
 
-.showDelConfirm{
-    display:none;
+.showDelConfirm {
+  display: none;
 }
 
 .showMovDrop {
-    display:none;
+  display: none;
+}
+.shelfContainer {
+  display: grid;
+  grid-template-columns: 1fr 6fr 1fr;
+  background: none;
+  height: 1280px;
+}
+
+.gameListContainer {
+  scroll-behavior: smooth;
+  overflow: scroll;
+  scroll-snap-type: y mandatory;
+  height: 1100px;
+  padding: 10px;
+}
+
+.gameListDiv > table > tbody > tr > td > a > img {
+  height: fit-content;
+}
+.gameListDiv > table > tbody > tr > td > a > img:hover {
+  height: fit-content;
+  /* width: 70px; */
+  box-shadow: 10px 5px 5px #282828;
+}
+.gameListDiv > table > tbody {
+  text-align: center;
+}
+.gameListDiv > table {
+  scroll-snap-align: start;
+  background: linear-gradient(420deg, #9146ff, #282828);
+  border-radius: 1rem;
+  padding: 5px;
+  margin-bottom: 25px;
+}
+.shelfTitle {
+  color: #9146ff;
+  top: 0px;
+  height: 70px;
+  background: #282828;
+  position: sticky;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.delete-button {
+  background-color: transparent;
+  border-color: transparent;
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+}
+.delete-button:hover {
+  cursor: pointer;
+}
+#move-dropdown {
+  background: top;
+  color: white;
+}
+#move-dropdown-button {
+  background-color: transparent;
+  border-color: transparent;
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+}
+
+#move-button {
+  color: white;
+  background: linear-gradient(to right, #9146ff, #282828);
+  border-color: transparent;
+  width: 120px;
+}
+#move-button:hover {
+  cursor: pointer;
+}
+.shelfBody {
+  background: linear-gradient(574deg, #282828, #282828, #282828, #9146ff);
+  overflow: hidden;
+  min-height: 100%;
+}
+#gamesLink {
+  text-decoration: none;
+  font-size: 20px;
+}
+#gamesLink:hover {
+  color: #282828;
+}
+.noGames {
+  background: linear-gradient(420deg, #9146ff, #282828);
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.shelf {
+  text-align: center;
+  width: fit-content;
+  height: fit-content;
+  margin-left: 25px;
+}
+#my-shelves {
+  color: lightgray;
+  height: 25px;
+  padding: 5px;
+}
+.shelfLinks > a:hover {
+  cursor: pointer;
+  color: #9146ff;
+}
+.shelfLinks {
+  list-style-type: none;
+}
+
+.hideAddButton {
+  margin: 5px;
+  background: linear-gradient(to right, #9146ff, #282828);
+  border-color: transparent;
+  color: white;
+  width: 80%;
+}
+.hideAddButton:hover {
+  cursor: pointer;
+}
+
+.hideDelButton {
+  margin: 5px;
+  background: linear-gradient(to right, #9146ff, #282828);
+  border-color: transparent;
+  color: white;
+  width: 80%;
+}
+
+#del-dropdown {
+  width: 100%;
+  background-color: transparent;
+  border-color: transparent;
+  font-size: 16px;
+  color: white;
+}
+#del-buttons-yes {
+  background-color: transparent;
+  font-size: 16px;
+  color: white;
+  width: 50%;
+}
+#del-buttons-no {
+  background-color: transparent;
+  color: white;
+  font-size: 16px;
+  width: 50%;
+}
+
+#del-buttons-yes:hover {
+  cursor: pointer;
+  background-color: white;
+  color: #282828;
+}
+
+#del-buttons-no:hover {
+  cursor: pointer;
+  background-color: white;
+  color: #282828;
 }

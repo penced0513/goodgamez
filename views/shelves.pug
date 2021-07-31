@@ -1,92 +1,103 @@
 extends layout.pug
 block content
-    ol.shelf: h2 My Shelves
-        each shelf in shelfList
-            li: a(onclick=`window.location.href='/shelves/${shelf.id}'`)=shelf.name
-        button(class='hideAddButton' href='#', type='button', onclick='hideAddButton()') Add Shelf
-        form(class='addShelfForm' action='/shelves' method='post')
-            input(type="hidden" name="_csrf" value=csrfToken)
-            label(class='addShelfForm', for='newShelf') Add a shelf:
-            input(class='addShelfForm', type='text', name='newShelf' required)
-            button(class='addShelfForm', type='submit') Add
-        form(action='/shelves/delete' method='post')
-            if deleteList.length
-                button(class='hideDelButton' type='button' href='#' onclick='hideDeleteButton()') Delete Shelf
-            p(id='showShelfId' class='showDelConfirm') Are you sure you want to delete this shelf?
-            select(class='showDelConfirm' name="shelfId")
-                each shelf in deleteList
-                    option(class='showDelConfirm' id=shelf.id value=shelf.id)=shelf.name
-            input(type="hidden" name="_csrf" value=csrfToken)
-            button(class='showDelConfirm' type='submit') Yes
-            button(class='showDelConfirm' type='button' onclick='hideDeleteConfirm()') No
-    h1=mainShelf.name
-    container(class='gameListContainer')
-        each game in findGames
-            div(class='gameListDiv' id='GameID${game.id}')
-                table
-                    thead
-                        th=game.name
-                        th=Review
-                    tbody
-                        tr
-                            td: a(href=`/games/${game.id}`): img(src=`${game.img}`)
-                            td: form(action='/shelves/move' method='post')
+    body.shelfBody
+        div.shelfContainer
+            ol.shelf: h2#my-shelves My Shelves:
+                each shelf in shelfList
+                    li.shelfLinks: a(onclick=`window.location.href='/shelves/${shelf.id}'`)=shelf.name
+                button(class='hideAddButton' href='#', type='button', onclick='hideAddButton()') Add Shelf
+                form(class='addShelfForm' action='/shelves' method='post')
+                    input(type="hidden" name="_csrf" value=csrfToken)
+                    label(class='addShelfForm', for='newShelf') Add a shelf:
+                    input(class='addShelfForm', type='text', name='newShelf' required)
+                    input(style="display: none", type='submit')
+                form(action='/shelves/delete' method='post')
+                    if deleteList.length
+                        button(class='hideDelButton' type='button' href='#' onclick='hideDeleteButton()') Delete Shelf
+                    p(id='showShelfId' class='showDelConfirm') Are you sure you want to delete this shelf?
+                    select(class='showDelConfirm' id="del-dropdown" name="shelfId")
+                        each shelf in deleteList
+                            option(class='showDelConfirm' id=shelf.id value=shelf.id)=shelf.name
+                    input(type="hidden" name="_csrf" value=csrfToken)
+                    button(class='showDelConfirm' id="del-buttons-yes" type='submit') Yes
+                    button(class='showDelConfirm' type='button' id="del-buttons-no" onclick='hideDeleteConfirm()') No
+            container(class='gameListContainer')
+                div(class='gameListDiv')
+                    if findGames.length == 0
+                        div.noGames
+                            h1=`You have no games on shelf: ${mainShelf.name}`
+                            a(id='gamesLink' href="http://good-gamez.herokuapp.com/games") Maybe check out our Games Page by clicking Here 👾
+                    each game in findGames
+                        table
+                            thead
+                                form(action='/shelves/deleteGame' method='post')
                                     input(type="hidden" name="_csrf" value=csrfToken)
                                     input(type="hidden" name='game' value=game.id)
                                     input(type="hidden" name='mainShelf' value=mainShelf.id)
-                                    button(class='hideMovButton' type='button' href='#' onclick='hideMoveButton()') Move Shelf
-                                    select(class='showMovDrop' name="shelfId")
-                                        each shelf in moveShelf
-                                            option(id=shelf.id value=shelf.id)=shelf.name
-                                    button(class='showMovDrop' type="submit") ✔️
+                                    th: button(type="submit" class="delete-button") ❌
+                                th=game.name
+                                form(action='/shelves/move' method='post')
+                                        input(type="hidden" name="_csrf" value=csrfToken)
+                                        input(type="hidden" name='game' value=game.id)
+                                        input(type="hidden" name='mainShelf' value=mainShelf.id)
+                                        th: button(class='hideMovButton' id="move-button" type='button' href='#' onclick='hideMoveButton()') Move Shelf
+                                        th: select(class='showMovDrop' id="move-dropdown" name="shelfId")
+                                            each shelf in moveShelf
+                                                option(id=shelf.id value=shelf.id)=shelf.name
+                                        th: button(class='showMovDrop' id="move-dropdown-button" type="submit") ✅
+                            tbody
+                                tr
+                                    td
+                                    td: a(href=`/games/${game.id}`): img(src=`${game.img}`)
+                                    td
+                                    td
+                                    td
+
+                                    //- if (reviewScoreArray.length)
+                                    //-     each reviewScore in reviewScoreArray
+                                    //-         td=reviewScore
+                                    //-td=game.Review.reviewScore
+            if findGames.length > 0
+                h1.shelfTitle=mainShelf.name
 
 
-                            form(action='/shelves/deleteGame' method='post')
-                                input(type="hidden" name="_csrf" value=csrfToken)
-                                input(type="hidden" name='game' value=game.id)
-                                input(type="hidden" name='mainShelf' value=mainShelf.id)
-                                td: button(type="submit") ❌
-                            //- if (reviewScoreArray.length)
-                            //-     each reviewScore in reviewScoreArray
-                            //-         td=reviewScore
-                            //-td=game.Review.reviewScore
-        script.
-            let showAddForm = () => {
-                document.querySelectorAll('.addShelfForm').forEach(el => {
-                el.style.display='block'
-              })
-            }
-            let hideAddButton = () => {
-                document.querySelector('.hideAddButton').style.display='none'
-                showAddForm()
-            }
-            let showDeleteConfirm = (block) => {
-                //document.getElementById('.showShelfId').innerhtml=`Are you sure you want to delete ${shelf.id}`
-                document.querySelectorAll('.showDelConfirm').forEach(el =>{
-                el.style.display = block
+            script.
+                let showAddForm = () => {
+                    document.querySelectorAll('.addShelfForm').forEach(el => {
+                    el.style.display='block'
                 })
-            }
+                }
+                let hideAddButton = () => {
+                    document.querySelector('.hideAddButton').style.display='none'
+                    showAddForm()
+                }
+                let showDeleteConfirm = (block) => {
+                    //document.getElementById('.showShelfId').innerhtml=`Are you sure you want to delete ${shelf.id}`
+                    document.querySelectorAll('.showDelConfirm').forEach(el =>{
+                    el.style.display = block
+                    })
+                }
 
-            let hideDeleteConfirm = () => {
-                let block = 'none'
-                let none = 'block'
-                hideDeleteButton(block, none)
-            }
+                let hideDeleteConfirm = () => {
+                    let block = 'none'
+                    let none = 'block'
+                    hideDeleteButton(block, none)
+                }
 
-            let hideDeleteButton = (block='block', none='none') => {
-                document.querySelectorAll('.hideDelButton').forEach(el => {
-                el.style.display = none
-                })
-                showDeleteConfirm(block)
-            }
-            let showMoveDrop = () => {
-                document.querySelectorAll('.showMovDrop').forEach(el =>{
-                el.style.display='block'
-                })
-            }
-            let hideMoveButton = () => {
-                document.querySelectorAll('.hideMovButton').forEach(el => {
-                el.style.display='none'
-                })
-                showMoveDrop()
-            }
+                let hideDeleteButton = (block='block', none='none') => {
+                    document.querySelectorAll('.hideDelButton').forEach(el => {
+                    el.style.display = none
+                    })
+                    showDeleteConfirm(block)
+                }
+                let showMoveDrop = () => {
+                    document.querySelectorAll('.showMovDrop').forEach(el =>{
+                    el.style.display='block'
+                    })
+                }
+                let hideMoveButton = () => {
+                    document.querySelectorAll('.hideMovButton').forEach(el => {
+                    el.style.display='none'
+                    })
+                    showMoveDrop()
+                }
