@@ -8,14 +8,11 @@
 h1 {
   color: white;
 }
-
-body:not(.shelfBody) {
-  background: linear-gradient(574deg, #282828, #282828, #282828, #9146ff);
-  color: white;
-  overflow: scroll;
-}
-
 body:not(nav) {
-    background-color: #282828;
-    color: #B3B3B3;
+  background: linear-gradient(574deg, #282828, #282828, #282828, #9146ff);
+  overflow: hidden;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

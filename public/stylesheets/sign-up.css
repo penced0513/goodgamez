@@ -1,13 +1,13 @@
 #sign-up-form {
-    background-color: lightgray;
+    background-color: transparent;
+    color: lightgray;
+    border: 2px solid #9146FF;
+    border-radius: 8px;
     margin: auto;
     position: absolute;
     top: 30%;
     left: 25%;
-    /* position: relative; */
     display: flex;
-    /* justify-content: center; */
     align-items: center;
-    justify-content: space-between;
     width: 50%;
 }

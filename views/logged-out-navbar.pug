@@ -1,12 +1,13 @@
 div#nav-container
   table
-    thead 
-      th.nav-games-btn
-        button(type="button" onclick="window.location.href='/games'") Games
-      th="Good Gamez"  
-      th#nav-login-btn
-        button(type="button" onclick="window.location.href='/login'") Log In
-      th#nav-signup-btn
-        button(type="button" onclick="window.location.href='/signup'") Sign Up
-      th#nav-demo-btn
-        button(type="button" onclick="window.location.href='/demo'") Demo
+    thead
+      tr#nav-rowloggedout
+        th#nav-games-btn
+          button(type="button" class="nav-buttons" onclick="window.location.href='/games'") Games
+        th(id="nav-logo"): img(src='logo.png' alt='Good Gamez' height='50px' width='120px')
+        th#nav-login-btn
+          button(type="button" class="nav-buttons" onclick="window.location.href='/login'") Log In
+        th#nav-signup-btn
+          button(type="button" class="nav-buttons" onclick="window.location.href='/signup'") Sign Up
+        th#nav-demo-btn
+          button(type="button" class="nav-buttons" onclick="window.location.href='/demo'") Demo

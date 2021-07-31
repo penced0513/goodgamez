@@ -6,6 +6,6 @@ block content
     form(action="/login", method="post")
       input(type="hidden" name="_csrf" value=csrfToken)
       +field("Username", "username", username, "text", "Enter Username", true)
-      +field("Password", "password", "", "text", "Enter Password", true)
+      +field("Password", "password", "", "password", "Enter Password", true)
       button(type="Submit") Log In
-    a(href="/signup") Don't have an account? Register here! 
+    a(href="/signup") Don't have an account? Register here!
