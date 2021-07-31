@@ -53,7 +53,7 @@
     flex-direction: column;
     align-content: center;
     margin: 1em;
-    scroll-snap-align: start;
+    scroll-snap-align: end;
     /* border: .1em solid black; */
 
 }
@@ -62,7 +62,7 @@
     align-self: center;
     color: #f0e6e6;
     font-weight: bold;
-} 
+}
 #games-container h2:hover, h4:hover {
     cursor: pointer;
     color: #9146FF;

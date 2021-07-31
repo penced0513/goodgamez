@@ -1,13 +1,27 @@
 #sign-up-form {
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+    align-items: center;
     background-color: transparent;
+    background: linear-gradient(420deg, #9146ff, #282828);
     color: lightgray;
-    border: 2px solid #9146FF;
-    border-radius: 8px;
+    border-radius: 1rem;
     margin: auto;
     position: absolute;
     top: 30%;
-    left: 25%;
-    display: flex;
-    align-items: center;
-    width: 50%;
+    left: 35%;
+    width: 30%;
+    height: 17%;
+}
+
+.registerbutton {
+  color: lightgray;
+  border: 1px solid #282828;
+  border-radius: 8px;
+  background-color: #282828;
+}
+
+.loginnotif:hover {
+    color:lightgreen
 }

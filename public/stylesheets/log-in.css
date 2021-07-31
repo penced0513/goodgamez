@@ -1,12 +1,26 @@
 #login-form {
-    background-color: lightgray;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+    align-items: center;
+    background-color: transparent;
+    background: linear-gradient(420deg, #9146ff, #282828);
+    color: lightgray;
+    border-radius: 1rem;
     margin: auto;
     position: absolute;
     top: 30%;
-    left: 25%;
-    /* position: relative; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
+    left: 35%;
+    width: 30%;
+    height: 10%;
+}
+
+.loginbutton {
+  color: lightgray;
+  border: 1px solid #282828;
+  border-radius: 8px;
+  background-color: #282828;
+}
+.signupnotif:hover {
+    color:lightgreen
 }
