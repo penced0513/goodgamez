@@ -1,7 +1,7 @@
 /* Everything below the nav bar */
 #game-page {
     display: grid;
-    grid-template-columns: 5fr 1fr;
+    grid-template-columns: 83.33% 16.66%;
     grid-template-areas: "game genres"
                          "game shelves"
 }
@@ -9,6 +9,9 @@
 /* H1 game title */
 #game-title {
     grid-area: title;
+    position: relative;
+    left: 6em;
+    top: 1em;
 }
 
 /* Image, average rating, genre, add to shelf button, description, and reviews */
@@ -16,7 +19,7 @@
     grid-area: game;
     display: grid;
     grid-template-columns: 5% 30% 60% 5%;
-    grid-template-rows: 10% auto 50% 25%; 
+    grid-template-rows: 10% auto 40% 35%;
     grid-template-areas: "title title title title"
                          ". game-section description ."
                          ". game-section user-review ."
@@ -25,6 +28,10 @@
 
 #game-section {
     grid-area: game-section
+}
+
+#game-section h2 {
+    font-size: 1.1em;
 }
 
 #game-description {
@@ -58,14 +65,15 @@
     font-weight: bold;
     font-size: 1.7em;
     border-bottom: .05em solid lightgray;
+    margin-bottom: 1em;
     color: #f0e6e6;
 }
 
 #reviews-container {
-    display: grid;
+    /* display: grid;
     grid-template-columns: 33.3% 33.3% 33.3%;
     grid-template-areas: "no-reviews no-reviews no-reviews"
-                         "user-div review review"
+                         "user-div review review" */
 }
 
 #all-reviews-box > h2 {
@@ -76,7 +84,10 @@
 /* List of shelves and which shelves the game is in */
 #game-shelf-container {
     grid-area: shelves;
-    border: .1em solid lightgray;
+    /* border: .1em solid lightgray; */
+    margin-top: 2em;
+    margin-right: .5em;
+
 }
 
 #game-shelf-container h2 {
@@ -107,7 +118,10 @@
 
 /* Contains a UL of all of the genres on the website */
 #game-genres-container {
-    border: .1em solid lightgray
+    /* border: .1em solid lightgray; */
+    margin-top: 4.51em;
+    margin-right: .5em;
+    
 }
 #game-genres-container h2 {
     text-align: center;

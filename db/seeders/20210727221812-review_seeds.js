@@ -11,7 +11,7 @@ module.exports = {
     return queryInterface.bulkInsert('Reviews', [
       {
         review: 'Metacritic said this game was good',
-        reviewScore: 89,
+        reviewScore: 4,
         userId: 1,
         gameId: 2,
         createdAt: new Date(),
