@@ -14,3 +14,8 @@ body:not(.shelfBody) {
   color: white;
   overflow: scroll;
 }
+
+body:not(nav) {
+    background-color: #282828;
+    color: #B3B3B3;
+}

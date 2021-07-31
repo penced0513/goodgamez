@@ -3,9 +3,9 @@ append head
   script(src="/javascripts/game.js" type="module" )
 block content
   div#game-page
-    h1(id="game-title")=`${game.name}`
     div#game-container
-      div
+      h1(id="game-title")=`${game.name}`
+      div#game-section
         img(src=`${game.img}`, alt="")
         div
           h2= `Average Rating: ${averageReviewScore}`
@@ -20,22 +20,27 @@ block content
                 each shelf in shelves
                   option(class='showMovDrop' value=`${shelf.id}`)=`${shelf.name}`
               button(class='showMovDrop' type="submit" id="addToShelfButton") Add To Shelf
-      div
+      div#game-description
+        h2 Description
         p=`${game.description}`
       if locals.authenticated
         input(type="hidden" name="userId" value=`${locals.user.id}`, id="fetchUserId")
         div#user-review-box
-      h2 Reviews
-        container#reviews-container
-    div#game-shelf-container
-      ul 
-        li= "Currently in"
-        if containedShelves.length
-          each shelf in containedShelves
-            li(onclick=`window.location.href="/shelves/${shelf.id}"`)= `${shelf.name} shelf`
-        else 
-          li= "Not in any shelf"
-    div#game-genre-container
+      div#all-reviews-box
+        h2 Reviews
+        div#reviews-container
+    if locals.authenticated
+      div#game-shelf-container
+        h2 Shelves
+        ul
+          if containedShelves.length
+            each shelf in containedShelves
+              li
+                a(href=`/shelves/${shelf.id}`)= `${shelf.name}`
+          else 
+            li= "Not in any shelf"
+    div#game-genres-container
+      h2 Genres
       ul
         each genre in genres
           li

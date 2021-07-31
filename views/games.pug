@@ -8,6 +8,7 @@ block content
           h2(class="game-names", onclick=`window.location.href="/games/${game.id}"`)=`${game.name}`
           h4(class="game-genres", onclick=`window.location.href="/genres/${game.Genre.id}"`)=`${game.Genre.name}`
     div#games-genres-container
+      h2 Genres
       ul
         each genre in genres
           li

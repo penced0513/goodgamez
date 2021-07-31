@@ -1,11 +1,133 @@
-.review-container  {
+/* Everything below the nav bar */
+#game-page {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    grid-template-areas: "game genres"
+                         "game shelves"
+}
+
+/* H1 game title */
+#game-title {
+    grid-area: title;
+}
+
+/* Image, average rating, genre, add to shelf button, description, and reviews */
+#game-container {
+    grid-area: game;
+    display: grid;
+    grid-template-columns: 5% 30% 60% 5%;
+    grid-template-rows: 10% auto 50% 25%; 
+    grid-template-areas: "title title title title"
+                         ". game-section description ."
+                         ". game-section user-review ."
+                         ". . reviews ."
+}
+
+#game-section {
+    grid-area: game-section
+}
+
+#game-description {
+    grid-area: description
+}
+
+#game-description > h2 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.7em;
+    border-bottom: .05em solid lightgray;
+    color: #f0e6e6;
+}
+
+/* User review or the form depending on review status */
+#user-review-box {
+    grid-area: user-review;
+    text-align: center;
+}
+
+/* Reviews header and all the reviews */
+#all-reviews-box {
+    grid-area: reviews;
     display: flex;
+    flex-direction: column;
+    align-content: center;
 }
 
-.review-username {
-    padding-right: 10px;
+#all-reviews-box h2 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.7em;
+    border-bottom: .05em solid lightgray;
+    color: #f0e6e6;
 }
 
-.showMovDrop {
-    display:none;
+#reviews-container {
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    grid-template-areas: "no-reviews no-reviews no-reviews"
+                         "user-div review review"
+}
+
+#all-reviews-box > h2 {
+    grid-area: header;
+    text-align: center;
+}
+
+/* List of shelves and which shelves the game is in */
+#game-shelf-container {
+    grid-area: shelves;
+    border: .1em solid lightgray;
+}
+
+#game-shelf-container h2 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.7em;
+    border-bottom: .05em solid lightgray;
+    color: #f0e6e6;
+}
+
+#game-shelf-container li {
+    display: flex;
+    justify-content: center;
+    margin-top: .5em;
+}
+
+#game-shelf-container a:hover {
+    color: #9146FF;
+    transition-duration: 150ms; 
+}
+
+#game-shelf-container a {
+    /* grid-area: genres; */
+    margin: auto;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Contains a UL of all of the genres on the website */
+#game-genres-container {
+    border: .1em solid lightgray
+}
+#game-genres-container h2 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.7em;
+    border-bottom: .05em solid lightgray;
+    color: #f0e6e6;
+}
+#game-genres-container li {
+    display: flex;
+    justify-content: center;
+    margin-top: .5em;
+}
+#game-genres-container a:hover {
+    color: #9146FF;
+    transition-duration: 150ms; 
+}
+#game-genres-container a {
+    /* grid-area: genres; */
+    margin: auto;
+    text-decoration: none;
+    font-weight: bold;
 }

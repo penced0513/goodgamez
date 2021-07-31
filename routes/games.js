@@ -59,6 +59,7 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req,res) => {
       include: {
         model: Game,
       },
+      order: [['name', 'ASC']],
       where: { userId: res.locals.user.id },
     })
 

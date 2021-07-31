@@ -1,7 +1,3 @@
-body {
-  background-color: hotpink;
-}
-
 /* This is the entire nav bar as a whole */
 container.nav-container {
   position: sticky;
@@ -29,8 +25,8 @@ tr#nav-row {
 }
 
 /*This selects all buttons*/
-button.nav-buttons {
-}
+/* button.nav-buttons {
+} */
 
 /*This is the individual buttons for the navbar*/
 th#nav-games-btn {
@@ -60,29 +56,31 @@ th#nav-logout-btn {
 }
 
 /* This is the entire body that contains all games */
-#games-container {
-  border: 20px solid darkgreen;
-}
 
-/* This is the row the game is in */
-.game {
-  border: 20px solid purple;
-}
+ #games-container {
+  /* border: 20px solid darkgreen; */
+ }
 
-/* This is the area around each individual game */
-.game-imgs {
-  border: 20px solid orange;
-}
 
-/* This is the area around the game name */
-.game-names {
-  border: 5px solid blue;
-}
+ /* This is the row the game is in */
+ .game {
+  /* border: 20px solid purple; */
+ }
 
-/* This is the area around the game genre text */
-.game-genres {
-  border: 5px solid pink;
-}
+ /* This is the area around each individual game */
+ .game-imgs {
+  /* border: 20px solid orange; */
+ }
+
+ /* This is the area around the game name */
+ .game-names {
+  /* border: 5px solid blue; */
+ }
+
+  /* This is the area around the game genre text */
+ .game-genres {
+  /* border: 5px solid pink; */
+ }
 
 /* This makes each button in the nav pop when hovered over */
 .nav-buttons:hover {
