@@ -3,15 +3,13 @@ container.nav-container {
   position: sticky;
   top: 0;
   width: 100%;
-  border-bottom: 1px solid darkorange;
 }
 
 /*navbar elements? */
 
 thead#nav-head {
-  background-color: white;
+  background-color: #282828;
   z-index: 1;
-  border: 3px solid peachpuff;
 }
 
 table {
@@ -22,6 +20,14 @@ tr#nav-row {
   display: grid;
   grid-template-columns: 1fr 1fr 0.5fr 3fr 1.5fr 1fr;
   grid-template-areas: "games shelves . logo user logout";
+  border-bottom: 3px solid #9146FF;
+}
+
+#nav-rowloggedout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 3fr 1fr 1fr 1fr;
+  grid-template-areas: "games . . logo login signup demo";
+  border-bottom: 3px solid #9146FF;
 }
 
 /*This selects all buttons*/
@@ -32,6 +38,26 @@ tr#nav-row {
 th#nav-games-btn {
   align-self: center;
   grid-area: games;
+  background-color: transparent;
+}
+
+#nav-games-btnlogout {
+  align-self: center;
+  grid-area: games;
+  background-color: transparent;
+}
+
+#nav-games-btn:hover {
+  background: linear-gradient(to right, #9146ff, #282828);
+  border-color: transparent;
+  transition-duration: 150ms;
+}
+
+.nav-buttons {
+  color: lightgray;
+  border: 1px solid #9146FF;
+  border-radius: 8px;
+  background-color: transparent;
 }
 
 th#nav-shelves-btn {
@@ -39,15 +65,59 @@ th#nav-shelves-btn {
   grid-area: shelves;
 }
 
+#nav-login-btn {
+  text-align: right;
+  align-self: center;
+  grid-area: login;
+}
+
+#nav-shelves-btn:hover {
+  background: linear-gradient(540deg, #9146ff, #282828);
+  border-color: transparent;
+  transition-duration: 150ms;
+}
+
+#nav-login-btn:hover{
+  background: linear-gradient(540deg, #9146ff, #282828);
+  border-color: transparent;
+  transition-duration: 150ms;
+}
+
+#nav-signup-btn:hover {
+  background: linear-gradient(540deg, #9146ff, #282828);
+  border-color: transparent;
+  transition-duration: 150ms;
+}
+
+#nav-signup-btn {
+  align-self: center;
+  text-align: center;
+  grid-area: signup;
+}
+
+#nav-demo-btn {
+  text-align: center;
+  align-self: center;
+  grid-area: demo;
+}
+
+#nav-demo-btn:hover {
+  background: linear-gradient(to left, #9146ff, #282828);
+  border-color: transparent;
+  transition-duration: 150ms;
+}
+
 th#nav-logo {
   align-self: center;
   grid-area: logo;
+  color:lightgray;
 }
 
 th#nav-user {
   align-self: center;
   text-align: right;
   grid-area: user;
+  color: lightgray;
 }
 
 th#nav-logout-btn {
@@ -55,36 +125,16 @@ th#nav-logout-btn {
   grid-area: logout;
 }
 
-/* This is the entire body that contains all games */
-
- #games-container {
-  /* border: 20px solid darkgreen; */
- }
-
-
- /* This is the row the game is in */
- .game {
-  /* border: 20px solid purple; */
- }
-
- /* This is the area around each individual game */
- .game-imgs {
-  /* border: 20px solid orange; */
- }
-
- /* This is the area around the game name */
- .game-names {
-  /* border: 5px solid blue; */
- }
-
-  /* This is the area around the game genre text */
- .game-genres {
-  /* border: 5px solid pink; */
- }
+#nav-logout-btn:hover {
+  background: linear-gradient(to left, #9146ff, #282828);
+  border-color: transparent;
+  transition-duration: 150ms;
+}
 
 /* This makes each button in the nav pop when hovered over */
 .nav-buttons:hover {
   cursor: pointer;
   font-size: 95%;
   animation: blink 0.5s ease-out alternate infinite;
+  transition-duration: 150ms;
 }

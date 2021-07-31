@@ -7,7 +7,7 @@ block content
       input(type="hidden" name="_csrf" value=csrfToken)
       +field("Username", "username", username, "text", "Enter Username", true)
       +field("Email", "email", email, "email", "Enter Email", true)
-      +field("Password", "password", "", "text", "Enter Password", true)
-      +field("Confirm Password", "confirmedPassword", "", "text", "Confirm Password", true)
+      +field("Password", "password", "", "password", "Enter Password", true)
+      +field("Confirm Password", "confirmedPassword", "", "password", "Confirm Password", true)
       button(type="submit") Register
     a(href="/login") Already have an account? Log in here!

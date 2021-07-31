@@ -20,6 +20,7 @@
   scroll-behavior: smooth;
   overflow: scroll;
   scroll-snap-type: y mandatory;
+  overflow-x: hidden;
   height: 1100px;
   padding: 10px;
 }
@@ -42,6 +43,27 @@
   padding: 5px;
   margin-bottom: 25px;
 }
+.gameListContainer::-webkit-scrollbar {
+  background-color: #282828;
+  width: 16px;
+}
+
+/* background of the scrollbar except button or resizer */
+.gameListContainer::-webkit-scrollbar-track {
+  background-color: #282828;
+}
+
+/* scrollbar itself */
+.gameListContainer::-webkit-scrollbar-thumb {
+  background-color: #9146FF;
+  border-radius: 16px;
+  border: 4px solid #282828;
+}
+
+/* set button(top and bottom of the scrollbar) */
+.gameListContainer::-webkit-scrollbar-button {
+  display:none;
+}
 .shelfTitle {
   color: #9146ff;
   top: 0px;
@@ -63,8 +85,8 @@
   cursor: pointer;
 }
 #move-dropdown {
-  background: top;
-  color: white;
+  background: transparent;
+  color: lightgray;
 }
 #move-dropdown-button {
   background-color: transparent;
@@ -75,7 +97,7 @@
 }
 
 #move-button {
-  color: white;
+  color: lightgray;
   background: linear-gradient(to right, #9146ff, #282828);
   border-color: transparent;
   width: 120px;
@@ -83,17 +105,14 @@
 #move-button:hover {
   cursor: pointer;
 }
-.shelfBody {
-  background: linear-gradient(574deg, #282828, #282828, #282828, #9146ff);
-  overflow: hidden;
-  min-height: 100%;
-}
+
 #gamesLink {
   text-decoration: none;
   font-size: 20px;
 }
 #gamesLink:hover {
   color: #282828;
+  transition-duration: 150ms;
 }
 .noGames {
   background: linear-gradient(420deg, #9146ff, #282828);
@@ -124,7 +143,7 @@
   margin: 5px;
   background: linear-gradient(to right, #9146ff, #282828);
   border-color: transparent;
-  color: white;
+  color: lightgray;
   width: 80%;
 }
 .hideAddButton:hover {
@@ -135,7 +154,7 @@
   margin: 5px;
   background: linear-gradient(to right, #9146ff, #282828);
   border-color: transparent;
-  color: white;
+  color: lightgray;
   width: 80%;
 }
 
@@ -144,29 +163,29 @@
   background-color: transparent;
   border-color: transparent;
   font-size: 16px;
-  color: white;
+  color: lightgray;
 }
 #del-buttons-yes {
   background-color: transparent;
   font-size: 16px;
-  color: white;
+  color: lightgray;
   width: 50%;
 }
 #del-buttons-no {
   background-color: transparent;
-  color: white;
+  color: lightgray;
   font-size: 16px;
   width: 50%;
 }
 
 #del-buttons-yes:hover {
   cursor: pointer;
-  background-color: white;
+  background-color: lightgray;
   color: #282828;
 }
 
 #del-buttons-no:hover {
   cursor: pointer;
-  background-color: white;
+  background-color: lightgray;
   color: #282828;
 }
