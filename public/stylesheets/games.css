@@ -34,7 +34,7 @@
     align-self: center;
     color: #f0e6e6;
     font-weight: bold;
-}
+} 
 #games-container h2:hover, h4:hover {
     cursor: pointer;
     color: #9146FF;
