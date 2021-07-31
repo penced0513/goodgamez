@@ -34,7 +34,7 @@ function createReviewForm (rating = 1) {
         <option value="5">5 </option>
       </select>
       <div>  
-        <textarea id="textReview" cols="30" rows="10" required></textarea>
+        <textarea style="resize:none" id="textReview" cols="30" rows="10" required></textarea>
       </div>
       <button id="submitReview">Post Review</button>
     </form>`
@@ -57,24 +57,27 @@ async function repopulateReviews(gameId) {
             reviewContainer.appendChild(textReviewContainer)
 
             reviewsContainer.appendChild(reviewContainer)
+            reviewContainer.setAttribute("style", "grid-area: no-reviews; text-align: center")
         } 
 
         reviews.forEach(review => {
-            const reviewContainer = document.createElement("div")
+            const userAndRatingContainer = document.createElement("div")
 
             const userNameContainer = document.createElement("div")
             userNameContainer.innerText = review.User.username
-            reviewContainer.appendChild(userNameContainer)
+            userAndRatingContainer.appendChild(userNameContainer)
 
             const ratingValueContainer = document.createElement("div")
             ratingValueContainer.innerText = `Rating: ${review.reviewScore}`
-            reviewContainer.appendChild(ratingValueContainer)
+            userAndRatingContainer.appendChild(ratingValueContainer)
+
+            reviewsContainer.appendChild(userAndRatingContainer)
+            userAndRatingContainer.setAttribute("style", "grid-area: user-div")
 
             const textReviewContainer = document.createElement("div")
             textReviewContainer.innerText = review.review
-            reviewContainer.appendChild(textReviewContainer)
-
-            reviewsContainer.appendChild(reviewContainer)
+            reviewsContainer.appendChild(textReviewContainer)
+            textReviewContainer.setAttribute("style", "grid-area: review")
         })
         return reviews
 }
@@ -141,7 +144,7 @@ function renderUserReview(username, reviewScore, review, userId, gameId) {
                 
                 await repopulateReviews(gameId)
                 
-                renderUserReview(username, ratingValue, textReview, userId, gameId )
+                await renderUserReview(username, ratingValue, textReview, userId, gameId )
             } else  {
                 const textReviewElement = document.getElementById("textReview")
                 textReviewElement.value = "Please write a review"
@@ -166,8 +169,8 @@ function renderUserReview(username, reviewScore, review, userId, gameId) {
             }
         })
         createReviewForm()
-        makeButtonPost(gameId, userId)
-        repopulateReviews(gameId)
+        await makeButtonPost(gameId, userId)
+        await repopulateReviews(gameId)
     })
 }
 
@@ -179,20 +182,24 @@ async function makeButtonPost(gameId, userId) {
         const textReview = document.getElementById("textReview").value
 
         if (textReview && textReview !== "Please write a review") {
-            const reviewData = { userId, review:textReview, reviewScore: ratingValue, gameId }
-            const postReviewFetch = await fetch(`/games/${gameId}/review`, {
-                method: "POST",
-                body: JSON.stringify(reviewData),
-                headers: {
-                  "Content-Type": "application/json"
-                }
-            })
-    
-            const postReviewData = await postReviewFetch.json()
-            
-            renderUserReview(postReviewData.username, ratingValue, textReview, userId,  gameId)
-    
-            repopulateReviews(gameId)
+            if (textReview.length > 1000) {
+                alert("Review must be 1000 characters or less")
+            } else {
+                const reviewData = { userId, review:textReview, reviewScore: ratingValue, gameId }
+                const postReviewFetch = await fetch(`/games/${gameId}/review`, {
+                    method: "POST",
+                    body: JSON.stringify(reviewData),
+                    headers: {
+                      "Content-Type": "application/json"
+                    }
+                })
+        
+                const postReviewData = await postReviewFetch.json()
+                
+                renderUserReview(postReviewData.username, ratingValue, textReview, userId,  gameId)
+        
+                repopulateReviews(gameId)
+            }
         } else  {
             const textReviewElement = document.getElementById("textReview")
             textReviewElement.value = "Please write a review"
