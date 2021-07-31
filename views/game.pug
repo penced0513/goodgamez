@@ -4,7 +4,8 @@ append head
 block content
   div#game-page
     div#game-container
-      h1(id="game-title")=`${game.name}`
+      div#game-title
+        h1=`${game.name}`
       div#game-section
         img(src=`${game.img}`, alt="")
         div

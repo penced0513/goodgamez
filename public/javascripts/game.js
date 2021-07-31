@@ -47,7 +47,7 @@ function createReviewForm (rating = 1) {
     text-align: center;
     font-weight: bold;
     font-size: 1.7em;
-    border-bottom: .05em solid lightgray;
+    border-bottom: .05em solid #404040;
     color: #f0e6e6;
     `)
 }
@@ -111,7 +111,7 @@ function renderUserReview(username, reviewScore, review, userId, gameId) {
     text-align: center;
     font-weight: bold;
     font-size: 1.7em;
-    border-bottom: .05em solid lightgray;
+    border-bottom: .05em solid #404040;
     color: #f0e6e6;
     `)
 
@@ -122,7 +122,7 @@ function renderUserReview(username, reviewScore, review, userId, gameId) {
 
     const textReviewContainer = document.createElement("div")
     textReviewContainer.innerText = review
-    textReviewContainer.setAttribute("style", "word-wrap: break-word; text-align: left; overflow-y: scroll")
+    textReviewContainer.setAttribute("style", "word-wrap: break-word; text-align: left")
     userReviewBox.appendChild(textReviewContainer)
 
     const editButton = document.createElement("button")
@@ -192,6 +192,7 @@ function renderUserReview(username, reviewScore, review, userId, gameId) {
     // userReviewBox.appendChild(editAndDeleteBtn)
     userReviewBox.appendChild(deleteButton)
     userReviewBox.setAttribute("style", `grid-area: user-review `)
+    editButton.setAttribute("style", "margin-top: 10px")
 
     deleteButton.addEventListener("click", async (e) => {
         e.preventDefault()
