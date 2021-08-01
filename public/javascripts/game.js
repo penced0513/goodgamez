@@ -47,7 +47,7 @@ function createReviewForm (rating = 1) {
     text-align: center;
     font-weight: bold;
     font-size: 1.7em;
-    border-bottom: .05em solid #404040;
+    border-bottom: .05em solid #9146FF;
     color: #f0e6e6;
     `)
 }
@@ -111,7 +111,7 @@ function renderUserReview(username, reviewScore, review, userId, gameId) {
     text-align: center;
     font-weight: bold;
     font-size: 1.7em;
-    border-bottom: .05em solid #404040;
+    border-bottom: .05em solid #9146FF;;
     color: #f0e6e6;
     `)
 

@@ -50,7 +50,7 @@
     text-align: center;
     font-weight: bold;
     font-size: 1.7em;
-    border-bottom: .05em solid #404040;
+    border-bottom: .05em solid #9146FF;
     color: #f0e6e6;
 }
 
@@ -72,7 +72,7 @@
     text-align: center;
     font-weight: bold;
     font-size: 1.7em;
-    border-bottom: .05em solid #404040;
+    border-bottom: .05em solid #9146FF;
     margin-bottom: 0.5em;
     color: #f0e6e6;
 }
@@ -95,14 +95,22 @@
     /* border: .1em solid lightgray; */
     margin-top: 2em;
     margin-right: .5em;
+    border-top: .1em solid #9146FF;
+    border-left: .1em solid #9146FF;
+    border-right: .1em solid #9146FF;
+    border-bottom: .1em solid #9146FF;
 }
 
 #game-shelf-container h2 {
     text-align: center;
     font-weight: bold;
     font-size: 1.7em;
-    border-bottom: .05em solid #404040;
+    border-bottom: .05em solid #9146FF;
     color: #f0e6e6;
+}
+
+#game-shelf-container ul {
+    margin-bottom: 1em;
 }
 
 #game-shelf-container li {
@@ -126,15 +134,25 @@
 /* Contains a UL of all of the genres on the website */
 #game-genres-container {
     /* border: .1em solid lightgray; */
-    margin-top: 4.51em;
+    /* margin-top: 4.51em; */
+    /* margin-right: .5em; */
+    border-top: .1em solid #9146FF;
+    border-left: .1em solid #9146FF;
+    border-right: .1em solid #9146FF;
+    border-bottom: .1em solid #9146FF;
     margin-right: .5em;
-    
+    margin-top: 1em;
 }
+
+#game-genres-container ul {
+    margin-bottom: 1em;
+}
+
 #game-genres-container h2 {
     text-align: center;
     font-weight: bold;
     font-size: 1.7em;
-    border-bottom: .05em solid #404040;
+    border-bottom: .05em solid #9146FF;
     color: #f0e6e6;
 }
 #game-genres-container li {
