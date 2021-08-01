@@ -84,19 +84,16 @@
   width: 16px;
 }
 
-/* background of the scrollbar except button or resizer */
 #game-container::-webkit-scrollbar-track {
   background-color: #282828;
 }
 
-/* scrollbar itself */
 #game-container::-webkit-scrollbar-thumb {
   background-color: #9146ff;
   border-radius: 16px;
   border: 4px solid #282828;
 }
 
-/* set button(top and bottom of the scrollbar) */
 #game-container::-webkit-scrollbar-button {
   display: none;
 }
@@ -152,7 +149,6 @@
 /* List of shelves and which shelves the game is in */
 #game-shelf-container {
   grid-area: shelves;
-  /* border: .1em solid lightgray; */
   margin-top: 2em;
   margin-right: 0.5em;
   margin-left: .5em;
@@ -186,7 +182,6 @@
 }
 
 #game-shelf-container a {
-  /* grid-area: genres; */
   margin: auto;
   text-decoration: none;
   font-weight: bold;
@@ -194,9 +189,6 @@
 
 /* Contains a UL of all of the genres on the website */
 #game-genres-container {
-  /* border: .1em solid lightgray; */
-  /* margin-top: 4.51em; */
-  /* margin-right: .5em; */
   border-top: 0.1em solid #9146ff;
   border-left: 0.1em solid #9146ff;
   border-right: 0.1em solid #9146ff;
@@ -227,7 +219,6 @@
   transition-duration: 150ms;
 }
 #game-genres-container a {
-  /* grid-area: genres; */
   margin: auto;
   text-decoration: none;
   font-weight: bold;

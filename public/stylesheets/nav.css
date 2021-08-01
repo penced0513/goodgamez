@@ -20,19 +20,15 @@ tr#nav-row {
   display: grid;
   grid-template-columns: 1fr 1fr 0.5fr 3fr 1.5fr 1fr;
   grid-template-areas: "games shelves . logo user logout";
-  border-bottom: 3px solid #9146FF;
+  border-bottom: 3px solid #9146ff;
 }
 
 #nav-rowloggedout {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 3fr 1fr 1fr 1fr;
   grid-template-areas: "games . . logo login signup demo";
-  border-bottom: 3px solid #9146FF;
+  border-bottom: 3px solid #9146ff;
 }
-
-/*This selects all buttons*/
-/* button.nav-buttons {
-} */
 
 /*This is the individual buttons for the navbar*/
 th#nav-games-btn {
@@ -47,15 +43,9 @@ th#nav-games-btn {
   background-color: transparent;
 }
 
-/* #nav-games-btn:hover {
-  background: linear-gradient(to right, #9146ff, #282828);
-  border-color: transparent;
-  transition-duration: 150ms;
-} */
-
 .nav-buttons {
   color: lightgray;
-  border: 1px solid #9146FF;
+  border: 1px solid #9146ff;
   border-radius: 8px;
   background-color: transparent;
 }
@@ -77,18 +67,6 @@ th#nav-shelves-btn {
   transition-duration: 500ms;
 }
 
-/* #nav-login-btn:hover{
-  background: linear-gradient(540deg, #9146ff, #282828);
-  border-color: transparent;
-  transition-duration: 150ms;
-}
-
-#nav-signup-btn:hover {
-  background: linear-gradient(540deg, #9146ff, #282828);
-  border-color: transparent;
-  transition-duration: 150ms;
-} */
-
 #nav-signup-btn {
   align-self: center;
   text-align: center;
@@ -101,16 +79,10 @@ th#nav-shelves-btn {
   grid-area: demo;
 }
 
-/* #nav-demo-btn:hover {
-  background: linear-gradient(to left, #9146ff, #282828);
-  border-color: transparent;
-  transition-duration: 150ms;
-} */
-
 th#nav-logo {
   align-self: center;
   grid-area: logo;
-  color:lightgray;
+  color: lightgray;
 }
 
 th#nav-user {
@@ -124,12 +96,6 @@ th#nav-logout-btn {
   align-self: center;
   grid-area: logout;
 }
-
-/* #nav-logout-btn:hover {
-  background: linear-gradient(to left, #9146ff, #282828);
-  border-color: transparent;
-  transition-duration: 150ms;
-} */
 
 /* This makes each button in the nav pop when hovered over */
 .nav-buttons:hover {

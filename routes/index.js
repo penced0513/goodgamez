@@ -44,9 +44,7 @@ router.post('/login', csrfProtection, asyncHandler(async (req, res) => {
 
 router.get('/logout', asyncHandler(async (req, res) => {
   await logoutUser(req, res);
-  // req.session = null;
-  // res.send("logged out")
-  req.session.save(()=> res.redirect('/'))
+  req.session.save(() => res.redirect('/'))
 }));
 
 router.get('/signup', csrfProtection, (req, res) => {
@@ -131,18 +129,14 @@ router.post('/signup', signupValidator, csrfProtection, asyncHandler(async (req,
 
   } else {
     res.render('sign-up', { title: "Good Gamez - Sign Up", csrfToken: req.csrfToken(), validationErrors, username, email })
-    }
+  }
 
 }))
 
-router.get('/demo', asyncHandler(async(req, res) => {
+router.get('/demo', asyncHandler(async (req, res) => {
   const user = await User.findByPk(1)
 
   loginUser(req, res, user)
-
-  // res.locals.user = user
-  // res.locals.authenticated = true
-  
   req.session.save(() => res.redirect('/'))
 }))
 
