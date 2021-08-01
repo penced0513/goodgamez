@@ -135,7 +135,7 @@ h4:hover {
 
     #games-page {
         display: grid;
-        grid-template-columns: 75% auto;
+        grid-template-columns: 82% auto;
         grid-template-areas: "games genres";
         background: none;
     }
