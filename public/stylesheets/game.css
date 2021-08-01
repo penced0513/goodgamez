@@ -173,7 +173,7 @@
 #game-shelf-container li {
   display: flex;
   justify-content: center;
-  margin-top: 0.5em;
+  padding-top: 0.5em;
 }
 
 #game-shelf-container a:hover {
@@ -209,10 +209,11 @@
   border-bottom: 0.05em solid #9146ff;
   color: #f0e6e6;
 }
+
 #game-genres-container li {
   display: flex;
   justify-content: center;
-  margin-top: 0.7em;
+  padding-top: 0.7em;
 }
 #game-genres-container a:hover {
   color: #9146ff;
@@ -222,4 +223,142 @@
   margin: auto;
   text-decoration: none;
   font-weight: bold;
+}
+
+
+@media screen and (max-width: 1800px) {
+  #game-container {
+    grid-area: game;
+    display: grid;
+    grid-template-columns: 5% auto 5%;
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 850px;
+    grid-template-rows: 10% auto auto auto;
+    grid-template-areas:
+        ".  title title "
+        ". game-section ."
+        ". description ."
+        ".  user-review ."
+        ".  reviews .";
+  }
+}
+
+@media screen and (max-width: 700px) {
+
+    #game-page {
+        display: grid;
+        grid-template-columns: 83.33% 16.66%;
+        grid-template-rows: 50% 50%;
+        grid-template-areas:
+          "game genres"
+          "game shelves";
+        color: #f0e6e6;
+    }
+
+    #game-genres-container ul {
+        margin-bottom: 0;
+        height: auto;
+    }
+
+    #game-genres-container {
+        overflow: scroll;
+        overflow-x: hidden;
+        border: hidden
+    }
+    #game-genres-container::-webkit-scrollbar {
+        background-color: #282828;
+        width: 16px;
+      }
+      
+      #game-genres-container::-webkit-scrollbar-track {
+        background-color: #282828;
+      }
+      
+      #game-genres-container::-webkit-scrollbar-thumb {
+        background-color: #9146ff;
+        border-radius: 16px;
+        border: 4px solid #282828;
+      }
+      
+      #game-genres-container::-webkit-scrollbar-button {
+        display: none;
+      }
+
+    #game-genres-container * {
+        font-size: small;
+    }
+    #game-genres-container li {
+        display: flex;
+        height: fit-content;
+        justify-content: flex-start;
+        align-content: flex-start;
+        border: 0.05em solid #9146ff;
+
+    }
+    #game-genres-container > h2 {
+        font-size: 20px;
+    }
+
+    #game-shelf-container {
+        height: 50%;
+        border: hidden
+    }
+
+    #game-shelf-container * {
+        font-size: small;
+    }
+      
+    #game-shelf-container h2 {
+        font-size: 18px;
+        border: hidden;
+    }
+
+    #game-shelf-container li {
+        align-content: flex-start;
+        border: 0.05em solid #9146ff;
+    }
+
+    #game-genres-container a {
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+        align-content: flex-start;
+        width: 100%;
+        height: 100%;
+    }
+
+    #game-shelf-container a {
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+        align-content: flex-start;
+        width: 100%;
+        height: 100%;
+    }
+
+    #game-page button:not(.hideMovButton, #addToShelfButton) {
+        width: auto;
+    }
+
+    #game-shelf-container {
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+    #game-shelf-container::-webkit-scrollbar {
+        background-color: #282828;
+        width: 16px;
+      }
+      
+      #game-shelf-container::-webkit-scrollbar-track {
+        background-color: #282828;
+      }
+      
+      #game-shelf-container::-webkit-scrollbar-thumb {
+        background-color: #9146ff;
+        border-radius: 16px;
+        border: 4px solid #282828;
+      }
+      
+      #game-shelf-container::-webkit-scrollbar-button {
+        display: none;
+      }
 }
