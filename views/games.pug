@@ -6,7 +6,7 @@ block content
         div.game
           img(src=`${game.img}`, alt="" class="game-imgs" onclick=`window.location.href="/games/${game.id}"`)
           h2(class="game-names", onclick=`window.location.href="/games/${game.id}"`)=`${game.name}`
-          h4(class="game-genres", onclick=`window.location.href="/genres/${game.Genre.id}"`)=`${game.Genre.name}`
+          h4(class="game-genres", onclick=`window.location.href="/genres/${game.Genre.id}"`)=`Genre: ${game.Genre.name}`
     div#games-genres-container
       h2 Genres
       ul
