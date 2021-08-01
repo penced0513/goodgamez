@@ -51,6 +51,7 @@
 }
 
 .game {
+
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -102,8 +103,10 @@ h4:hover {
   transition-duration: 150ms;
 }
 #games-genres-container a {
-  /* grid-area: genres; */
-  margin: auto;
-  text-decoration: none;
-  font-weight: bold;
+
+    /* grid-area: genres; */
+    margin: auto;
+    text-decoration: none;
+    font-weight: bold;
+    color: #B3B3B3;
 }

@@ -3,15 +3,23 @@
     display: grid;
     grid-template-columns: 83.33% 16.66%;
     grid-template-areas: "game genres"
-                         "game shelves"
+                         "game shelves";
+    color: #f0e6e6;
+}
+
+#game-page li {
+    color: #B3B3B3;
 }
 
 /* H1 game title */
 #game-title {
+    display: flex;
+    align-items: flex-end;
     grid-area: title;
-    position: relative;
-    left: 6em;
-    top: 1em;
+}
+
+#game-title > h1 {
+    height: fit-content;
 }
 
 /* Image, average rating, genre, add to shelf button, description, and reviews */
@@ -19,8 +27,8 @@
     grid-area: game;
     display: grid;
     grid-template-columns: 5% 30% 60% 5%;
-    grid-template-rows: 10% auto 40% 35%;
-    grid-template-areas: "title title title title"
+    grid-template-rows: 10% auto 45% 30%;
+    grid-template-areas: ". title title title"
                          ". game-section description ."
                          ". game-section user-review ."
                          ". . reviews ."
@@ -42,7 +50,7 @@
     text-align: center;
     font-weight: bold;
     font-size: 1.7em;
-    border-bottom: .05em solid lightgray;
+    border-bottom: .05em solid #404040;
     color: #f0e6e6;
 }
 
@@ -64,8 +72,8 @@
     text-align: center;
     font-weight: bold;
     font-size: 1.7em;
-    border-bottom: .05em solid lightgray;
-    margin-bottom: 1em;
+    border-bottom: .05em solid #404040;
+    margin-bottom: 0.5em;
     color: #f0e6e6;
 }
 
@@ -87,14 +95,13 @@
     /* border: .1em solid lightgray; */
     margin-top: 2em;
     margin-right: .5em;
-
 }
 
 #game-shelf-container h2 {
     text-align: center;
     font-weight: bold;
     font-size: 1.7em;
-    border-bottom: .05em solid lightgray;
+    border-bottom: .05em solid #404040;
     color: #f0e6e6;
 }
 
@@ -127,7 +134,7 @@
     text-align: center;
     font-weight: bold;
     font-size: 1.7em;
-    border-bottom: .05em solid lightgray;
+    border-bottom: .05em solid #404040;
     color: #f0e6e6;
 }
 #game-genres-container li {

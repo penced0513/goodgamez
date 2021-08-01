@@ -5,9 +5,9 @@ block content
   div(id="sign-up-form")
     form(action="/signup", method="post")
       input(type="hidden" name="_csrf" value=csrfToken)
-      +field("Username", "username", username, "text", "Enter Username", true)
-      +field("Email", "email", email, "email", "Enter Email", true)
-      +field("Password", "password", "", "password", "Enter Password", true)
-      +field("Confirm Password", "confirmedPassword", "", "password", "Confirm Password", true)
-      button(type="submit") Register
-    a(href="/login") Already have an account? Log in here!
+      +field("Username: ", "username", username, "text", "Enter Username", true)
+      +field("Email: ", "email", email, "email", "Enter Email", true)
+      +field("Password: ", "password", "", "password", "Enter Password", true)
+      +field("Confirm Password: ", "confirmedPassword", "", "password", "Confirm Password", true)
+      button(class='registerbutton' type="submit") Register
+    a(href="/login" class='loginnotif') Already have an account? Log in here!

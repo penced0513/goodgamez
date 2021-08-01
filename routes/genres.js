@@ -16,7 +16,7 @@ router.get('/:id(\\d+)', asyncHandler(async(req, res) => {
     order: [['name', 'ASC']]
   })
 
-  res.render("genres", { games, genres, title: `Good Gamez - ${genre.name}` })
+  res.render("games", { games, genres, title: `Good Gamez - ${genre.name}` })
 }))
 
 module.exports = router

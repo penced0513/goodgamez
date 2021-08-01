@@ -47,11 +47,11 @@ th#nav-games-btn {
   background-color: transparent;
 }
 
-#nav-games-btn:hover {
+/* #nav-games-btn:hover {
   background: linear-gradient(to right, #9146ff, #282828);
   border-color: transparent;
   transition-duration: 150ms;
-}
+} */
 
 .nav-buttons {
   color: lightgray;
@@ -71,13 +71,13 @@ th#nav-shelves-btn {
   grid-area: login;
 }
 
-#nav-shelves-btn:hover {
+.nav-buttons:hover {
   background: linear-gradient(540deg, #9146ff, #282828);
   border-color: transparent;
-  transition-duration: 150ms;
+  transition-duration: 500ms;
 }
 
-#nav-login-btn:hover{
+/* #nav-login-btn:hover{
   background: linear-gradient(540deg, #9146ff, #282828);
   border-color: transparent;
   transition-duration: 150ms;
@@ -87,7 +87,7 @@ th#nav-shelves-btn {
   background: linear-gradient(540deg, #9146ff, #282828);
   border-color: transparent;
   transition-duration: 150ms;
-}
+} */
 
 #nav-signup-btn {
   align-self: center;
@@ -101,11 +101,11 @@ th#nav-shelves-btn {
   grid-area: demo;
 }
 
-#nav-demo-btn:hover {
+/* #nav-demo-btn:hover {
   background: linear-gradient(to left, #9146ff, #282828);
   border-color: transparent;
   transition-duration: 150ms;
-}
+} */
 
 th#nav-logo {
   align-self: center;
@@ -125,11 +125,11 @@ th#nav-logout-btn {
   grid-area: logout;
 }
 
-#nav-logout-btn:hover {
+/* #nav-logout-btn:hover {
   background: linear-gradient(to left, #9146ff, #282828);
   border-color: transparent;
   transition-duration: 150ms;
-}
+} */
 
 /* This makes each button in the nav pop when hovered over */
 .nav-buttons:hover {
