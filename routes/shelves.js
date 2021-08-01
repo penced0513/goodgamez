@@ -30,15 +30,6 @@ router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
                 id: gameListArray,
             }
         })
-        // const findReviews = await Review.findAll({
-        //     where: {
-        //         gameId: gameListArray,
-        //         userId
-        //     }
-        // })
-        // let reviewScoreArray = findReviews.map(el => {
-        //     return el.reviewScore
-        // })
         const deleteList = await Gameshelf.findAll({
             where: {
                 userId,
@@ -118,8 +109,6 @@ router.post('/add', csrfProtection, asyncHandler(async (req, res) => {
     if (shelfId !== userAllShelfId) {
         await JoinsGamesAndShelf.create({ shelfId, gameId })
     }
-    // Need to find the shelf that we're adding the game on to and then see if it's removable
-    // If removable, check to make sure it's not in any other removable and destroy if it is
     res.redirect(`/games/${gameId}`)
 }));
 
@@ -235,7 +224,6 @@ router.post('/deleteGame', csrfProtection, asyncHandler(async (req, res) => {
     const { game, mainShelf } = req.body
 
     let shelf = await Gameshelf.findByPk(mainShelf)
-    console.log(shelf)
     if (shelf.name !== 'All') {
         let gameDel = await JoinsGamesAndShelf.findAll({
             where: {
