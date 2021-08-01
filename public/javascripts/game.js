@@ -88,7 +88,7 @@ async function repopulateReviews(gameId) {
         userAndRatingContainer.setAttribute("style", "grid-area: user-div")
 
         reviewContainer.appendChild(userAndRatingContainer)
-        reviewContainer.setAttribute("style", 'display: grid; grid-template-areas: "user-div review"; grid-template-columns: 15% 85%; margin-bottom: 2em')
+        reviewContainer.setAttribute("style", 'display: grid; grid-template-areas: "user-div review"; grid-template-columns: 25% 75%; margin-bottom: 2em')
 
         const textReviewContainer = document.createElement("div")
         textReviewContainer.innerText = review.review
