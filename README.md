@@ -1,10 +1,12 @@
-# goodgamez
-goodreads except with video games!
+# Good Gamez
+![image](https://user-images.githubusercontent.com/83110040/127756956-489b6243-1ff0-40cc-a717-75d1fb831beb.png)
 
+[You can go to our website here!](https://good-gamez.herokuapp.com/)
 
-# Express Project Skeleton
+Good Gamez is a social cataloging websites that allows individuals to search its database of games and reviews. When searching for games, a user can use the genres tab to search for specific genres they are interested in. When a game that satifies their criteria is found, they can add it to a shelf which is either a default or user-made group that stores the games they are interested in.
 
-Use this project skeleton as a starting point for structuring your app. Things to note
-* Sequelize configuration has not yet been added -- you will need to set that up yourself
-* You may find yourself wanting to use javascript -- js files can be added in `public/javascripts` and should be appended to the Pug templates as needed
-* CSS files can go in `public/stylesheets` and also will need to be added to Pug templates
+## Authors Acknowledgement
+* Daniel Pence - [Github](github.com/penced0513)
+* Curtis Bridge - [Github](github.com/C-Bridge17)
+* Shawn Boyle - [Github](github.com/ShawnBoyle7)
+* Kristian Martinez - [Github](github.com/kristianmartinw)
