@@ -84,8 +84,20 @@ h4:hover {
   text-align: center;
 }
 #games-genres-container {
-  border: 0.1em solid #9146ff;
+    border-top: .1em solid #9146FF;
+    border-left: .1em solid #9146FF;
+    border-right: .1em solid #9146FF;
+    border-bottom: .1em solid #9146FF;
+    height: fit-content;
+    margin-top: 1em;
+    margin-right: .5em;
+    margin-left: .5em;
 }
+
+#games-genres-container ul {
+    margin-bottom: 1em;
+}
+
 #games-genres-container h2 {
   text-align: center;
   font-weight: bold;
@@ -94,9 +106,9 @@ h4:hover {
   color: #f0e6e6;
 }
 #games-genres-container li {
-  display: flex;
-  justify-content: center;
-  margin-top: 0.5em;
+    display: flex;
+    justify-content: center;
+    margin-top: .7em;
 }
 #games-genres-container a:hover {
   color: #9146ff;
