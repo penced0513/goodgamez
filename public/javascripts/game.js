@@ -80,6 +80,7 @@ async function repopulateReviews(gameId) {
         const userNameContainer = document.createElement("div")
         userNameContainer.innerText = review.User.username
         userAndRatingContainer.appendChild(userNameContainer)
+        userNameContainer.setAttribute('style', 'word-wrap: break-word')
 
         const ratingValueContainer = document.createElement("div")
         ratingValueContainer.innerText = `Rating: ${review.reviewScore}`
