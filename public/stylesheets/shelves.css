@@ -21,7 +21,7 @@
   overflow: scroll;
   scroll-snap-type: y mandatory;
   overflow-x: hidden;
-  height: 1100px;
+  height: 850px;
   padding: 10px;
 }
 
@@ -88,6 +88,7 @@
 #move-dropdown {
   background: transparent;
   color: lightgray;
+  border-color: #9146ff;
 }
 
 #move-dropdown > * {
@@ -168,7 +169,7 @@
 #del-dropdown {
   width: 100%;
   background-color: transparent;
-  border-color: transparent;
+  border-color: #9146ff;
   font-size: 16px;
   color: lightgray;
 }

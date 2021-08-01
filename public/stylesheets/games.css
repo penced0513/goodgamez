@@ -15,9 +15,9 @@
 #games-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto;
+  grid-template-rows: auto auto auto 1fr;
   overflow: scroll;
-  height: 1100px;
+  height: 850px;
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
   overflow-x: hidden;

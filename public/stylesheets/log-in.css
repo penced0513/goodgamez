@@ -12,7 +12,16 @@
     top: 30%;
     left: 35%;
     width: 30%;
-    height: 10%;
+    height: max-content;
+}
+
+#login-form > * {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#login-form > form > div > * {
+  margin-top: 10px;
 }
 
 .loginbutton {

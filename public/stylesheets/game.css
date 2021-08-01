@@ -7,9 +7,51 @@
     color: #f0e6e6;
 }
 
+#game-page button:not(.hideMovButton, #addToShelfButton) {
+    margin: 5px;
+    background: linear-gradient(to right, #9146ff, #282828);
+    border-color: transparent;
+    color: lightgray;
+    width: 10%;
+}
+
+#shelf-selection {
+    width: 40%;
+    background-color: transparent;
+    border-color: #9146ff;
+    font-size: 16px;
+    color: lightgray;
+}
+
+#shelf-selection > * {
+    width: 100%;
+    background-color: transparent;
+    border-color: transparent;
+    font-size: 16px;
+    color: #282828;
+}
+
+.hideMovButton {
+    margin: 5px;
+    background: linear-gradient(to right, #9146ff, #282828);
+    border-color: transparent;
+    color: lightgray;
+    width: 20%;
+}
+
+#addToShelfButton {
+    margin: 5px;
+    background: linear-gradient(to right, #9146ff, #282828);
+    border-color: transparent;
+    color: lightgray;
+    width: 20%;
+}
+
+
 #game-page li {
     color: #B3B3B3;
 }
+
 
 /* H1 game title */
 #game-title {
@@ -158,7 +200,7 @@
 #game-genres-container li {
     display: flex;
     justify-content: center;
-    margin-top: .5em;
+    margin-top: .7em;
 }
 #game-genres-container a:hover {
     color: #9146FF;
