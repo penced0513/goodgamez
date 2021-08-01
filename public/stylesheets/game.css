@@ -1,214 +1,239 @@
 /* Everything below the nav bar */
 #game-page {
-    display: grid;
-    grid-template-columns: 83.33% 16.66%;
-    grid-template-areas: "game genres"
-                         "game shelves";
-    color: #f0e6e6;
+  display: grid;
+  grid-template-columns: 83.33% 16.66%;
+  grid-template-areas:
+    "game genres"
+    "game shelves";
+  color: #f0e6e6;
 }
 
 #game-page button:not(.hideMovButton, #addToShelfButton) {
-    margin: 5px;
-    background: linear-gradient(to right, #9146ff, #282828);
-    border-color: transparent;
-    color: lightgray;
-    width: 10%;
+  margin: 5px;
+  background: linear-gradient(to right, #9146ff, #282828);
+  border-color: transparent;
+  color: lightgray;
+  width: 10%;
 }
 
 #shelf-selection {
-    width: 40%;
-    background-color: transparent;
-    border-color: #9146ff;
-    font-size: 16px;
-    color: lightgray;
+  width: 40%;
+  background-color: transparent;
+  border-color: #9146ff;
+  font-size: 16px;
+  color: lightgray;
 }
 
 #shelf-selection > * {
-    width: 100%;
-    background-color: transparent;
-    border-color: transparent;
-    font-size: 16px;
-    color: #282828;
+  width: 100%;
+  background-color: transparent;
+  border-color: transparent;
+  font-size: 16px;
+  color: #282828;
 }
 
 .hideMovButton {
-    margin: 5px;
-    background: linear-gradient(to right, #9146ff, #282828);
-    border-color: transparent;
-    color: lightgray;
-    width: 20%;
+  margin: 5px;
+  background: linear-gradient(to right, #9146ff, #282828);
+  border-color: transparent;
+  color: lightgray;
+  width: 20%;
 }
 
 #addToShelfButton {
-    margin: 5px;
-    background: linear-gradient(to right, #9146ff, #282828);
-    border-color: transparent;
-    color: lightgray;
-    width: 20%;
+  margin: 5px;
+  background: linear-gradient(to right, #9146ff, #282828);
+  border-color: transparent;
+  color: lightgray;
+  width: 20%;
 }
-
 
 #game-page li {
-    color: #B3B3B3;
+  color: #b3b3b3;
 }
-
 
 /* H1 game title */
 #game-title {
-    display: flex;
-    align-items: flex-end;
-    grid-area: title;
+  display: flex;
+  align-items: flex-end;
+  grid-area: title;
 }
 
 #game-title > h1 {
-    height: fit-content;
+  height: fit-content;
 }
 
 /* Image, average rating, genre, add to shelf button, description, and reviews */
 #game-container {
-    grid-area: game;
-    display: grid;
-    grid-template-columns: 5% 30% 60% 5%;
-    grid-template-rows: 10% auto 45% 30%;
-    grid-template-areas: ". title title title"
-                         ". game-section description ."
-                         ". game-section user-review ."
-                         ". . reviews ."
+  grid-area: game;
+  display: grid;
+  grid-template-columns: 5% 30% 60% 5%;
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 850px;
+  grid-template-rows: 10% auto 45% 30%;
+  grid-template-areas:
+    ". title title title"
+    ". game-section description ."
+    ". game-section user-review ."
+    ". . reviews .";
+}
+
+#game-container::-webkit-scrollbar {
+  background-color: #282828;
+  width: 16px;
+}
+
+/* background of the scrollbar except button or resizer */
+#game-container::-webkit-scrollbar-track {
+  background-color: #282828;
+}
+
+/* scrollbar itself */
+#game-container::-webkit-scrollbar-thumb {
+  background-color: #9146ff;
+  border-radius: 16px;
+  border: 4px solid #282828;
+}
+
+/* set button(top and bottom of the scrollbar) */
+#game-container::-webkit-scrollbar-button {
+  display: none;
 }
 
 #game-section {
-    grid-area: game-section
+  grid-area: game-section;
 }
 
 #game-section h2 {
-    font-size: 1.1em;
+  font-size: 1.1em;
 }
 
 #game-description {
-    grid-area: description
+  grid-area: description;
 }
 
 #game-description > h2 {
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.7em;
-    border-bottom: .05em solid #9146FF;
-    color: #f0e6e6;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.7em;
+  border-bottom: 0.05em solid #9146ff;
+  color: #f0e6e6;
 }
 
 /* User review or the form depending on review status */
 #user-review-box {
-    grid-area: user-review;
-    text-align: center;
+  grid-area: user-review;
+  text-align: center;
 }
 
 /* Reviews header and all the reviews */
 #all-reviews-box {
-    grid-area: reviews;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
+  grid-area: reviews;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 }
 
 #all-reviews-box h2 {
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.7em;
-    border-bottom: .05em solid #9146FF;
-    margin-bottom: 0.5em;
-    color: #f0e6e6;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.7em;
+  border-bottom: 0.05em solid #9146ff;
+  margin-bottom: 0.5em;
+  color: #f0e6e6;
 }
 
 #reviews-container {
-    /* display: grid;
+  /* display: grid;
     grid-template-columns: 33.3% 33.3% 33.3%;
     grid-template-areas: "no-reviews no-reviews no-reviews"
                          "user-div review review" */
 }
 
 #all-reviews-box > h2 {
-    grid-area: header;
-    text-align: center;
+  grid-area: header;
+  text-align: center;
 }
 
 /* List of shelves and which shelves the game is in */
 #game-shelf-container {
-    grid-area: shelves;
-    /* border: .1em solid lightgray; */
-    margin-top: 2em;
-    margin-right: .5em;
-    border-top: .1em solid #9146FF;
-    border-left: .1em solid #9146FF;
-    border-right: .1em solid #9146FF;
-    border-bottom: .1em solid #9146FF;
+  grid-area: shelves;
+  /* border: .1em solid lightgray; */
+  margin-top: 2em;
+  margin-right: 0.5em;
+  border-top: 0.1em solid #9146ff;
+  border-left: 0.1em solid #9146ff;
+  border-right: 0.1em solid #9146ff;
+  border-bottom: 0.1em solid #9146ff;
 }
 
 #game-shelf-container h2 {
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.7em;
-    border-bottom: .05em solid #9146FF;
-    color: #f0e6e6;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.7em;
+  border-bottom: 0.05em solid #9146ff;
+  color: #f0e6e6;
 }
 
 #game-shelf-container ul {
-    margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 #game-shelf-container li {
-    display: flex;
-    justify-content: center;
-    margin-top: .5em;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5em;
 }
 
 #game-shelf-container a:hover {
-    color: #9146FF;
-    transition-duration: 150ms; 
+  color: #9146ff;
+  transition-duration: 150ms;
 }
 
 #game-shelf-container a {
-    /* grid-area: genres; */
-    margin: auto;
-    text-decoration: none;
-    font-weight: bold;
+  /* grid-area: genres; */
+  margin: auto;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 /* Contains a UL of all of the genres on the website */
 #game-genres-container {
-    /* border: .1em solid lightgray; */
-    /* margin-top: 4.51em; */
-    /* margin-right: .5em; */
-    border-top: .1em solid #9146FF;
-    border-left: .1em solid #9146FF;
-    border-right: .1em solid #9146FF;
-    border-bottom: .1em solid #9146FF;
-    margin-right: .5em;
-    margin-top: 1em;
+  /* border: .1em solid lightgray; */
+  /* margin-top: 4.51em; */
+  /* margin-right: .5em; */
+  border-top: 0.1em solid #9146ff;
+  border-left: 0.1em solid #9146ff;
+  border-right: 0.1em solid #9146ff;
+  border-bottom: 0.1em solid #9146ff;
+  margin-right: 0.5em;
+  margin-top: 1em;
 }
 
 #game-genres-container ul {
-    margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 #game-genres-container h2 {
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.7em;
-    border-bottom: .05em solid #9146FF;
-    color: #f0e6e6;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.7em;
+  border-bottom: 0.05em solid #9146ff;
+  color: #f0e6e6;
 }
 #game-genres-container li {
-    display: flex;
-    justify-content: center;
-    margin-top: .7em;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.7em;
 }
 #game-genres-container a:hover {
-    color: #9146FF;
-    transition-duration: 150ms; 
+  color: #9146ff;
+  transition-duration: 150ms;
 }
 #game-genres-container a {
-    /* grid-area: genres; */
-    margin: auto;
-    text-decoration: none;
-    font-weight: bold;
+  /* grid-area: genres; */
+  margin: auto;
+  text-decoration: none;
+  font-weight: bold;
 }
