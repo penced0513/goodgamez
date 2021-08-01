@@ -144,13 +144,6 @@
   color: #f0e6e6;
 }
 
-#reviews-container {
-  /* display: grid;
-    grid-template-columns: 33.3% 33.3% 33.3%;
-    grid-template-areas: "no-reviews no-reviews no-reviews"
-                         "user-div review review" */
-}
-
 #all-reviews-box > h2 {
   grid-area: header;
   text-align: center;
