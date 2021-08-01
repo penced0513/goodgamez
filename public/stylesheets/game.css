@@ -162,6 +162,7 @@
   /* border: .1em solid lightgray; */
   margin-top: 2em;
   margin-right: 0.5em;
+  margin-left: .5em;
   border-top: 0.1em solid #9146ff;
   border-left: 0.1em solid #9146ff;
   border-right: 0.1em solid #9146ff;
@@ -209,6 +210,7 @@
   border-bottom: 0.1em solid #9146ff;
   margin-right: 0.5em;
   margin-top: 1em;
+  margin-left: .5em;
 }
 
 #game-genres-container ul {
