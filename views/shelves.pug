@@ -9,8 +9,8 @@ block content
                 form(class='addShelfForm' action='/shelves' method='post')
                     input(type="hidden" name="_csrf" value=csrfToken)
                     label(class='addShelfForm', for='newShelf') Add a shelf:
-                    input(class='addShelfForm', type='text', name='newShelf' required)
-                    input(style="display: none", type='submit')
+                    input(class='addShelfForm', type='text', name='newShelf', required placeholder="Press enter to confirm!")
+                    input(style="display: none", type='submit' )
                 form(action='/shelves/delete' method='post')
                     if deleteList.length
                         button(class='hideDelButton' type='button' href='#' onclick='hideDeleteButton()') Delete Shelf

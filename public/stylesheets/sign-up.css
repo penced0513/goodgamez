@@ -12,7 +12,16 @@
     top: 30%;
     left: 35%;
     width: 30%;
-    height: 17%;
+    height: max-content;
+}
+
+#sign-up-form > * {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#sign-up-form > form > div > * {
+  margin-top: 10px;
 }
 
 .registerbutton {

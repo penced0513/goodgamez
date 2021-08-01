@@ -49,6 +49,7 @@ function createReviewForm (rating = 1) {
     font-size: 1.7em;
     border-bottom: .05em solid #9146FF;
     color: #f0e6e6;
+    margin-bottom: 0.5em;
     `)
 }
 
@@ -191,7 +192,7 @@ function renderUserReview(username, reviewScore, review, userId, gameId) {
     // editAndDeleteBtn.appendChild(deleteButton)
     // userReviewBox.appendChild(editAndDeleteBtn)
     userReviewBox.appendChild(deleteButton)
-    userReviewBox.setAttribute("style", `grid-area: user-review `)
+    userReviewBox.setAttribute("style", `grid-area: user-review`)
     editButton.setAttribute("style", "margin-top: 10px")
 
     deleteButton.addEventListener("click", async (e) => {
