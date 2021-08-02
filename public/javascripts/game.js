@@ -33,7 +33,7 @@ function createReviewForm(rating = 1) {
         <option value="5">5 </option>
       </select>
       <div>
-        <textarea style="resize:none" id="textReview" cols="30" rows="10" required></textarea>
+        <textarea style="resize:none" id="textReview" cols="50" rows="10" required placeholder = "Please limit your review to 1000 characters or less"></textarea>
       </div>
       <button id="submitReview">Post Review</button>
     </form>`
@@ -88,7 +88,7 @@ async function repopulateReviews(gameId) {
         userAndRatingContainer.setAttribute("style", "grid-area: user-div")
 
         reviewContainer.appendChild(userAndRatingContainer)
-        reviewContainer.setAttribute("style", 'display: grid; grid-template-areas: "user-div review"; grid-template-columns: 25% 75%; margin-bottom: 2em')
+        reviewContainer.setAttribute("style", 'display: grid; grid-template-areas: "user-div review"; grid-template-columns: 15% 85%; margin-bottom: 2em')
 
         const textReviewContainer = document.createElement("div")
         textReviewContainer.innerText = review.review
