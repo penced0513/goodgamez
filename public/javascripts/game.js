@@ -71,8 +71,11 @@ async function repopulateReviews(gameId) {
         reviewsContainer.appendChild(reviewContainer)
         reviewContainer.setAttribute("style", "grid-area: no-reviews; text-align: center")
     }
-
+    let totalReviewScore = 0;
     reviews.forEach(review => {
+        if (review.reviewScore) {
+            totalReviewScore += review.reviewScore
+        }
         const reviewContainer = document.createElement("div")
 
         const userAndRatingContainer = document.createElement("div")
@@ -96,6 +99,12 @@ async function repopulateReviews(gameId) {
         textReviewContainer.setAttribute("style", "grid-area: review; word-wrap: break-word")
         reviewsContainer.appendChild(reviewContainer)
     })
+    if (totalReviewScore != 0) {
+        let averageReviewScore = totalReviewScore/reviews.length
+        document.getElementById("averageReviewScore").innerText = `Average Rating: ${averageReviewScore.toFixed(1)}`
+    } else {
+        document.getElementById("averageReviewScore").innerText = "Average Rating: Leave the first review!"
+    }
     return reviews
 }
 

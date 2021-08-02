@@ -9,7 +9,7 @@ block content
       div#game-section
         img(src=`${game.img}`, alt="")
         div
-          h2= `Average Rating: ${averageReviewScore}`
+          h2#averageReviewScore= `Average Rating: ${averageReviewScore}`
         div
           h2= `Genre: ${game.Genre.name}`
           if shelves
