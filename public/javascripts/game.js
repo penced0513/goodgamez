@@ -103,7 +103,7 @@ async function repopulateReviews(gameId) {
         let averageReviewScore = totalReviewScore/reviews.length
         document.getElementById("averageReviewScore").innerText = `Average Rating: ${averageReviewScore.toFixed(1)}`
     } else {
-        document.getElementById("averageReviewScore").innerText = "Leave the first review!"
+        document.getElementById("averageReviewScore").innerText = "Average Rating: Leave the first review!"
     }
     return reviews
 }
