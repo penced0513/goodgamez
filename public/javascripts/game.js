@@ -33,7 +33,7 @@ function createReviewForm(rating = 1) {
         <option value="5">5 </option>
       </select>
       <div>
-        <textarea style="resize:none" id="textReview" cols="30" rows="10" required></textarea>
+        <textarea style="resize:none" id="textReview" cols="50" rows="10" required placeholder = "Please limit your review to 1000 characters or less"></textarea>
       </div>
       <button id="submitReview">Post Review</button>
     </form>`
@@ -71,8 +71,11 @@ async function repopulateReviews(gameId) {
         reviewsContainer.appendChild(reviewContainer)
         reviewContainer.setAttribute("style", "grid-area: no-reviews; text-align: center")
     }
-
+    let totalReviewScore = 0;
     reviews.forEach(review => {
+        if (review.reviewScore) {
+            totalReviewScore += review.reviewScore
+        }
         const reviewContainer = document.createElement("div")
 
         const userAndRatingContainer = document.createElement("div")
@@ -88,7 +91,7 @@ async function repopulateReviews(gameId) {
         userAndRatingContainer.setAttribute("style", "grid-area: user-div")
 
         reviewContainer.appendChild(userAndRatingContainer)
-        reviewContainer.setAttribute("style", 'display: grid; grid-template-areas: "user-div review"; grid-template-columns: 25% 75%; margin-bottom: 2em')
+        reviewContainer.setAttribute("style", 'display: grid; grid-template-areas: "user-div review"; grid-template-columns: 15% 85%; margin-bottom: 2em')
 
         const textReviewContainer = document.createElement("div")
         textReviewContainer.innerText = review.review
@@ -96,6 +99,12 @@ async function repopulateReviews(gameId) {
         textReviewContainer.setAttribute("style", "grid-area: review; word-wrap: break-word")
         reviewsContainer.appendChild(reviewContainer)
     })
+    if (totalReviewScore != 0) {
+        let averageReviewScore = totalReviewScore/reviews.length
+        document.getElementById("averageReviewScore").innerText = `Average Rating: ${averageReviewScore.toFixed(1)}`
+    } else {
+        document.getElementById("averageReviewScore").innerText = "Average Rating: Leave the first review!"
+    }
     return reviews
 }
 
