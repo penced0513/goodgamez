@@ -24,12 +24,13 @@
   margin-top: 10px;
 }
 
-.loginbutton {
+/* .loginbutton {
   color: lightgray;
   border: 1px solid #282828;
   border-radius: 8px;
   background-color: #282828;
-}
+} */
+
 .signupnotif:hover {
     color:lightgreen
 }

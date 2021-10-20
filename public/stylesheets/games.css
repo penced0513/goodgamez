@@ -62,9 +62,9 @@ h4:hover {
   box-shadow: -0.4em -0.4em 0.4em #9146ff;
 }
 
-.game-names,
-.game-genres {
+.game-names, .game-genres {
   text-align: center;
+  margin-top: 0.5em;
 }
 #games-genres-container {
   border-top: 0.1em solid #9146ff;
