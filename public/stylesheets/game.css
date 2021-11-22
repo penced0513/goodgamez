@@ -24,6 +24,11 @@
   color: lightgray;
 }
 
+#selectRating {
+  background-color: #282828;
+  color: white;
+}
+
 #shelf-selection > * {
   width: 100%;
   background-color: transparent;
@@ -52,6 +57,17 @@
 
 #game-page li {
   color: #b3b3b3;
+}
+
+#game-page textarea::placeholder {
+  color: white;
+}
+
+#game-page textarea {
+  background-color: #282828;
+  color: white;
+  padding: 8px;
+  margin-top: 5px;
 }
 
 /* H1 game title */
@@ -169,8 +185,9 @@
   text-align: center;
   font-weight: bold;
   font-size: 1.7em;
-  border-bottom: 0.05em solid #9146ff;
+  /* border-bottom: 0.05em solid #9146ff; */
   color: #f0e6e6;
+  margin-top: 10px;
 }
 
 #game-shelf-container ul {
@@ -213,8 +230,9 @@
   text-align: center;
   font-weight: bold;
   font-size: 1.7em;
-  border-bottom: 0.05em solid #9146ff;
+  /* border-bottom: 0.05em solid #9146ff; */
   color: #f0e6e6;
+  margin-top: 10px;
 }
 
 #game-genres-container li {

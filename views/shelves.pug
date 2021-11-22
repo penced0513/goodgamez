@@ -5,12 +5,13 @@ block content
             ol.shelf: h2#my-shelves My Shelves:
                 each shelf in shelfList
                     li.shelfLinks: a(onclick=`window.location.href='/shelves/${shelf.id}'`)=shelf.name
-                button(class='hideAddButton' href='#', type='button', onclick='hideAddButton()') Add Shelf
+                button(class='hideAddButton' href='#', type='button', onclick='hideAddButton()') Create Shelf
                 form(class='addShelfForm' action='/shelves' method='post')
                     input(type="hidden" name="_csrf" value=csrfToken)
-                    label(class='addShelfForm', for='newShelf') Add a shelf:
+                    label(class='addShelfForm', for='newShelf') Create a shelf:
                     input(class='addShelfForm', type='text', name='newShelf', required placeholder="Press enter to confirm!")
-                    input(style="display: none", type='submit' )
+                    //- input(style="display: none", type='submit' )
+                    button(type="submit" class="create-shelf-button") Create Shelf
                 form(action='/shelves/delete' method='post')
                     if deleteList.length
                         button(class='hideDelButton' type='button' href='#' onclick='hideDeleteButton()') Delete Shelf

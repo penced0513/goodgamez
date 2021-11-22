@@ -1,5 +1,10 @@
 .addShelfForm {
   display: none;
+  margin-top: 10px;
+}
+
+.create-shelf-button {
+  margin-top: 10px;
 }
 
 .showDelConfirm {
@@ -196,4 +201,8 @@
   cursor: pointer;
   background-color: lightgray;
   color: #282828;
+}
+
+.shelfContainer li {
+  margin-top: 10px;
 }

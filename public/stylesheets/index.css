@@ -29,3 +29,7 @@ button {
   background-color: transparent;
   min-width: fit-content;
 }
+
+button:hover {
+  cursor: pointer
+}
