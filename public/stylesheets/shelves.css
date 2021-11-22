@@ -1,5 +1,10 @@
 .addShelfForm {
   display: none;
+  margin-top: 10px;
+}
+
+.create-shelf-button {
+  margin-top: 10px;
 }
 
 .showDelConfirm {
@@ -59,6 +64,7 @@
 .gameListContainer::-webkit-scrollbar-button {
   display: none;
 }
+
 .shelfTitle {
   color: #9146ff;
   top: 0px;
@@ -69,16 +75,10 @@
   margin-top: 10px;
 }
 
-.delete-button {
-  background-color: transparent;
-  border-color: transparent;
-  width: 40px;
-  height: 40px;
-  font-size: 16px;
-}
 .delete-button:hover {
   cursor: pointer;
 }
+
 #move-dropdown {
   background: transparent;
   color: lightgray;
@@ -199,4 +199,8 @@
   cursor: pointer;
   background-color: lightgray;
   color: #282828;
+}
+
+.shelfContainer li {
+  margin-top: 10px;
 }

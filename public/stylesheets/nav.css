@@ -1,11 +1,8 @@
-/* This is the entire nav bar as a whole */
 container.nav-container {
   position: sticky;
   top: 0;
   width: 100%;
 }
-
-/*navbar elements? */
 
 thead#nav-head {
   background-color: #282828;
@@ -30,7 +27,6 @@ tr#nav-row {
   border-bottom: 3px solid #9146ff;
 }
 
-/*This is the individual buttons for the navbar*/
 th#nav-games-btn {
   align-self: center;
   grid-area: games;
@@ -43,11 +39,18 @@ th#nav-games-btn {
   background-color: transparent;
 }
 
-.nav-buttons {
+/* .nav-buttons {
   color: lightgray;
   border: 1px solid #9146ff;
+  padding: 2.7% 0;
+  width: 37.5%;
   border-radius: 8px;
   background-color: transparent;
+  min-width: fit-content;
+} */
+
+.nav-buttons{
+  margin-right: 0.8rem;
 }
 
 th#nav-shelves-btn {
@@ -56,15 +59,22 @@ th#nav-shelves-btn {
 }
 
 #nav-login-btn {
-  text-align: right;
+  text-align: center;
   align-self: center;
   grid-area: login;
 }
 
 .nav-buttons:hover {
-  background: linear-gradient(540deg, #9146ff, #282828);
-  border-color: transparent;
-  transition-duration: 500ms;
+  cursor: pointer;
+  background: #9146ff;
+  /* transition: background 600ms; */
+  /* background: linear-gradient(#9146ff, #282828); */
+  /* border-color: transparent; */
+  /* border: 1px solid #9146ff; */
+  /* transition-duration: 500ms; */
+  /* transition-duration: 150ms; */
+  /* font-size: 95%; */
+  /* animation: blink 0.5s easse-out alternate infinite; */
 }
 
 #nav-signup-btn {
@@ -95,12 +105,4 @@ th#nav-user {
 th#nav-logout-btn {
   align-self: center;
   grid-area: logout;
-}
-
-/* This makes each button in the nav pop when hovered over */
-.nav-buttons:hover {
-  cursor: pointer;
-  font-size: 95%;
-  animation: blink 0.5s ease-out alternate infinite;
-  transition-duration: 150ms;
 }

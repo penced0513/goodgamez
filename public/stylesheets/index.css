@@ -5,9 +5,11 @@
 @import "shelves.css";
 @import "games.css";
 @import "game.css";
+
 h1 {
   color: white;
 }
+
 body:not(nav) {
   background: linear-gradient(574deg, #282828, #282828, #282828, #9146ff);
   overflow: hidden;
@@ -16,4 +18,18 @@ body:not(nav) {
   background-repeat: no-repeat;
   background-size: cover;
   color: lightgray;
+}
+
+button {
+  color: lightgray;
+  border: 1px solid #9146ff;
+  padding: 0.4rem 0;
+  width: 5.3rem;
+  border-radius: 8px;
+  background-color: transparent;
+  min-width: fit-content;
+}
+
+button:hover {
+  cursor: pointer
 }
